@@ -122,34 +122,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Application_Date__c</fieldItem>
                 <identifier>RecordApplication_Date_cField</identifier>
-                <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Applied</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Interviewing</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Negotiating</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Accepted</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Closed</rightValue>
-                    </criteria>
-                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -184,34 +156,6 @@
                 </fieldInstanceProperties>
                 <fieldItem>Record.Follow_Up_Date__c</fieldItem>
                 <identifier>RecordFollow_up_date_cField</identifier>
-                <visibilityRule>
-                    <booleanFilter>1 OR 2 OR 3 OR 4 OR 5</booleanFilter>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Applied</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Interviewing</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Negotiating</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Accepted</rightValue>
-                    </criteria>
-                    <criteria>
-                        <leftValue>{!Record.Status__c}</leftValue>
-                        <operator>EQUAL</operator>
-                        <rightValue>Closed</rightValue>
-                    </criteria>
-                </visibilityRule>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
