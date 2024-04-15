@@ -4,8 +4,10 @@
     <hasActivationRequired>false</hasActivationRequired>
     <label>Job Application Tracker User</label>
     <permissionSets>Account_Management</permissionSets>
+    <permissionSets>Apex_Class_Access_Management</permissionSets>
     <permissionSets>Assigned_Apps_Management</permissionSets>
     <permissionSets>Contact_Management</permissionSets>
+    <permissionSets>Custom_Metadata_Type_Management</permissionSets>
     <permissionSets>Event_Management</permissionSets>
     <permissionSets>Job_Application_Contact_Management</permissionSets>
     <permissionSets>Job_Application_Management</permissionSets>
