@@ -315,6 +315,16 @@
     </relatedContent>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Job_Application__c</fields>
+        <relatedList>Job_Application_Contact__c.Contact__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>Position_Title__c</fields>
+        <fields>Work_Model__c</fields>
+        <fields>Salary__c</fields>
+        <fields>Star_Rating__c</fields>
+        <fields>Status__c</fields>
         <relatedList>Job_Application__c.Primary_Contact__c</relatedList>
     </relatedLists>
     <relatedLists>
@@ -346,23 +356,6 @@
         <fields>EMAIL_STATUS.TIMES_OPENED</fields>
         <fields>EMAIL_STATUS.LAST_OPEN_DATE</fields>
         <relatedList>RelatedEmailStatusList</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>TASK.SUBJECT</fields>
-        <fields>TASK.WHO_NAME</fields>
-        <fields>TASK.WHAT_NAME</fields>
-        <fields>ACTIVITY.TASK</fields>
-        <fields>TASK.DUE_DATE</fields>
-        <fields>TASK.STATUS</fields>
-        <fields>TASK.CLOSED</fields>
-        <fields>TASK.PRIORITY</fields>
-        <fields>CORE.USERS.FULL_NAME</fields>
-        <fields>TASK.LAST_UPDATE</fields>
-        <relatedList>Activity.Interviewer__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <relatedList>Job_Application_Contact__c.Contact__c</relatedList>
     </relatedLists>
     <relatedObjects>AccountId</relatedObjects>
     <showEmailCheckbox>false</showEmailCheckbox>
