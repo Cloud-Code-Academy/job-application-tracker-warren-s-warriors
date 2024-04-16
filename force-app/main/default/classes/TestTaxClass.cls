@@ -40,12 +40,39 @@ public with sharing class TestTaxClass {
         system.debug('The Federal Income Tax ' + fedIncomeTax7);
         System.assertEquals(174238.62, fedIncomeTax7);
 
-        // test 7 
+        // test 8
         Decimal fedIncomeTax8 = Taxes.calculateFederalTaxes(1000.00);
         system.debug('The Federal Income Tax ' + fedIncomeTax8);
-        System.assertEquals(Null, fedIncomeTax8);
+        System.assertEquals(0, fedIncomeTax8);
     }
+    
+    // Apex Trigger Class Tests
+    @IsTest
+    static void unitApexTaxesTest(){
+         Job_Application__c testNewRecord = new Job_Application__c();
+         testNewRecord.Salary__c = 24850;
+         
+         // perform the test 
+         Test.startTest();
+         insert testNewRecord;
+         test.stopTest();
 
+         // query the data
+         Job_Application__c queryData = [SELECT Id, Salary__c, Federal_Income_Tax__c, 
+                                                Social_Security_Tax__c, Medicare_Taxes__c
+                                         FROM Job_Application__c
+                                         WHERE Salary__c = 24850];
+        System.debug('The Salary is : $' + queryData.Salary__c);
+
+        //Check and Assert the values of the corresponding tax fields Federal, Social Security and Medicare
+
+         System.debug('The Federal Tax is :' + queryData.Federal_Income_Tax__c.setScale(2, System.RoundingMode.HALF_UP));
+         System.debug('The Social Security Tax is :' + queryData.Social_Security_Tax__c.setScale(2, System.RoundingMode.HALF_UP));
+         System.debug('The Social Security Tax is :' + queryData.Medicare_Taxes__c.setScale(2, System.RoundingMode.HALF_UP));
+         System.assertEquals(1100.00, queryData.Federal_Income_Tax__c.setScale(2, System.RoundingMode.HALF_UP));
+         System.assertEquals(1540.70, queryData.Social_Security_Tax__c.setScale(2, System.RoundingMode.HALF_UP));
+         System.assertEquals(360.33, queryData.Medicare_Taxes__c.setScale(2, System.RoundingMode.HALF_UP));
+    }
     @IsTest
     static void testSocialSecurity(){
         Decimal socialSecurityTaxes = Taxes.calcSocialSecurityTaxes(10000.00);

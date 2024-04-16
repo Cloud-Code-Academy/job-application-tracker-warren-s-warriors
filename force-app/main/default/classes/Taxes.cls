@@ -3,7 +3,7 @@ public with sharing class Taxes {
     public static Decimal calculateFederalTaxes(Decimal salary){
         // calculation of net Federal Taxes 
         //netTakeHomePay;
-        Decimal fedTaxLiability;
+        Decimal fedTaxLiability = 0;
         salary = salary - 13850; 
         if( salary == Null || salary <=0){
             return fedTaxLiability;
@@ -37,18 +37,18 @@ public with sharing class Taxes {
                     //netTakeHomePay = salary - taxLiability;
                     system.debug('Federal Tax Liability is ' + fedTaxLiability);
             } 
-        return fedTaxLiability;
+        return fedTaxLiability.setScale(2, System.RoundingMode.HALF_UP);
     }
     // calculate Social Security Taxes
     public static Decimal calcSocialSecurityTaxes(Decimal salary){
         Decimal ssTax = salary * .062;
-        return ssTax;
+        return ssTax.setScale(2, System.RoundingMode.HALF_UP);
     }
     // calculate Medicare Taxes
     public static Decimal calcMedicareTaxes(Decimal salary){
         
-        Decimal ssTax = salary * .0145;
-        return ssTax;
+        Decimal medicareTaxes = salary * .0145;
+        return medicareTaxes.setScale(2, System.RoundingMode.HALF_UP);
     }
 
 }
