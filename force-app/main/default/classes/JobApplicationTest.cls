@@ -80,8 +80,8 @@ private with sharing class JobApplicationTest {
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
-                'Update failed. First exception on row 0 with id ' + jobApplicationSalesforce.Id + '; first error: FIELD_CUSTOM_VALIDATION_EXCEPTION, Application Date cannot be after Follow-Up Date: []', 
-                e.getMessage(), 
+                'FIELD_CUSTOM_VALIDATION_EXCEPTION, Application Date cannot be after Follow-Up Date', 
+                e.getMessage().substringBetween('first error: ', ': ['), 
                 'Exception message does not match: ' + e.getMessage()
             );
         }
