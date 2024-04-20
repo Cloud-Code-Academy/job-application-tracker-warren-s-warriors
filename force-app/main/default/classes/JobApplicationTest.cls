@@ -163,8 +163,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Things to do for a job saved' 
                 AND ActivityDate = NEXT_WEEK 
-                AND Priority = 'Low' 
-            WITH USER_MODE
+                AND Priority = 'Low'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -244,8 +243,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Things to do for a job to apply' 
                 AND ActivityDate = NEXT_WEEK 
-                AND Priority = 'Normal' 
-            WITH USER_MODE
+                AND Priority = 'Normal'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -325,8 +323,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Things to do after applying for a job' 
                 AND ActivityDate = NEXT_WEEK 
-                AND Priority = 'Normal' 
-            WITH USER_MODE
+                AND Priority = 'Normal'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -406,8 +403,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Interview prep' 
                 AND ActivityDate = TOMORROW 
-                AND Priority = 'High' 
-            WITH USER_MODE
+                AND Priority = 'High'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -487,8 +483,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Negotiation prep' 
                 AND ActivityDate = TOMORROW 
-                AND Priority = 'High' 
-            WITH USER_MODE
+                AND Priority = 'High'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -568,8 +563,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Celebration' 
                 AND ActivityDate = NEXT_WEEK 
-                AND Priority = 'Low' 
-            WITH USER_MODE
+                AND Priority = 'Low'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
@@ -649,8 +643,7 @@ private with sharing class JobApplicationTest {
             FROM Task 
             WHERE Subject = 'Closed job application' 
                 AND ActivityDate = NEXT_WEEK 
-                AND Priority = 'Normal' 
-            WITH USER_MODE
+                AND Priority = 'Normal'
         ];
 
         System.assertEquals(2, retrievedTasks.size(), 'Expect 2 tasks created');
