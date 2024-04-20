@@ -73,7 +73,6 @@ package.xml
 **/profiles/**
 **/profileSessionSettings/**
 **/queues/**
-**/quickActions/**
 **/reportTypes/**
 **/roles/**
 **/settings/DevHub**
