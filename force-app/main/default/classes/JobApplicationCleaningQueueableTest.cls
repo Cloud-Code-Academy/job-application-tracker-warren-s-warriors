@@ -18,6 +18,22 @@ private class JobApplicationCleaningQueueableTest {
 
         jobApplicationsToInsert.add(jobApplicationSavedFollowUp30DaysAgo);
 
+        Job_Application__c jobApplicationApplyingFollowUp29DaysAgo = new Job_Application__c(
+            Status__c = 'Applying', 
+            Follow_Up_Date__c = Date.today() - 29, 
+            Notes__c = 'test note'
+        );
+
+        jobApplicationsToInsert.add(jobApplicationApplyingFollowUp29DaysAgo);
+
+        Job_Application__c jobApplicationApplyingFollowUp30DaysAgo = new Job_Application__c(
+            Status__c = 'Applying', 
+            Follow_Up_Date__c = Date.today() - 30, 
+            Notes__c = 'test note'
+        );
+
+        jobApplicationsToInsert.add(jobApplicationApplyingFollowUp30DaysAgo);
+
         Job_Application__c jobApplicationAcceptedFollowUp29DaysAgo = new Job_Application__c(
             Status__c = 'Accepted', 
             Follow_Up_Date__c = Date.today() - 29
@@ -32,25 +48,11 @@ private class JobApplicationCleaningQueueableTest {
 
         jobApplicationsToInsert.add(jobApplicationAcceptedFollowUp30DaysAgo);
 
-        Job_Application__c jobApplicationClosedFollowUp29DaysAgo = new Job_Application__c(
-            Status__c = 'Closed', 
-            Follow_Up_Date__c = Date.today() - 29
-        );
-
-        jobApplicationsToInsert.add(jobApplicationClosedFollowUp29DaysAgo);
-
-        Job_Application__c jobApplicationClosedFollowUp30DaysAgo = new Job_Application__c(
-            Status__c = 'Closed', 
-            Follow_Up_Date__c = Date.today() - 30
-        );
-
-        jobApplicationsToInsert.add(jobApplicationClosedFollowUp30DaysAgo);
-
         insert jobApplicationsToInsert;
     }
 
     @IsTest
-    private static void cleanStaleJobApplication_Enqueue_ExpectZeroStaleJobApplication() {
+    private static void cleanStaleJobApplication_Enqueue_ExpectTwoStaleJobApplicationsWithClosedStatus() {
         // GIVEN
 
         // WHEN
@@ -86,15 +88,12 @@ private class JobApplicationCleaningQueueableTest {
                 Status__c, 
                 Follow_Up_Date__c 
             FROM Job_Application__c 
-            WHERE Status__c NOT IN (
-                    'Closed', 
-                    'Accepted'
-                ) 
+            WHERE Status__c = 'Closed' 
                 AND Follow_Up_Date__c != null 
                 AND Follow_Up_Date__c <= N_DAYS_AGO:30
         ];
 
-        System.assertEquals(0, retrievedJobApplications.size(), 'Expect 0 stale job application');
+        System.assertEquals(2, retrievedJobApplications.size(), 'Expect 2 stale job applications with closed status');
 
         AsyncApexJob jobInfo_THEN = [
             SELECT 
