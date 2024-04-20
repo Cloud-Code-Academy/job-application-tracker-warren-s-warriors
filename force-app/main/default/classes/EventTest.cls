@@ -79,7 +79,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 16, 00, 00);
@@ -156,7 +156,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 07, 09, 00, 00);
@@ -233,7 +233,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 09, 00, 00);
@@ -310,7 +310,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 09, 00, 00);
@@ -387,7 +387,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 11, 00, 00);
@@ -464,7 +464,7 @@ private with sharing class EventTest {
 
         for (Event eventToUpdate : eventsToUpdate) {
             if (eventToUpdate.Subject == 'codeEveryDay') {
-                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 04, 00, 00);
+                eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 06, 00, 00);
                 eventToUpdate.EndDateTime = Datetime.newInstance(2024, 04, 01, 07, 00, 00);
             } else if (eventToUpdate.Subject == 'informationalInterview') {
                 eventToUpdate.StartDateTime = Datetime.newInstance(2024, 04, 01, 11, 00, 00);

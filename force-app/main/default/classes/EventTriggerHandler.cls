@@ -40,23 +40,23 @@ public with sharing class EventTriggerHandler {
             Long eventEndDTInMilliseconds = event.EndDateTime.getTime();
 
             if (
-                (newEventStartDTInMilliseconds <= eventStartDTInMilliseconds && eventStartDTInMilliseconds <= newEventEndDTInMilliseconds) 
-                && (newEventStartDTInMilliseconds <= eventEndDTInMilliseconds && eventEndDTInMilliseconds <= newEventEndDTInMilliseconds)
+                (newEventStartDTInMilliseconds <= eventStartDTInMilliseconds && eventStartDTInMilliseconds < newEventEndDTInMilliseconds) 
+                && (newEventStartDTInMilliseconds < eventEndDTInMilliseconds && eventEndDTInMilliseconds <= newEventEndDTInMilliseconds)
             ) {
                 error = 'Cannot overlap event: newStartDT existingStartDT existingEndDT newEndDT';
             } else if (
-                (newEventStartDTInMilliseconds <= eventStartDTInMilliseconds && eventStartDTInMilliseconds <= newEventEndDTInMilliseconds) 
-                && (eventStartDTInMilliseconds <= newEventEndDTInMilliseconds && newEventEndDTInMilliseconds <= eventEndDTInMilliseconds)
+                (newEventStartDTInMilliseconds <= eventStartDTInMilliseconds && eventStartDTInMilliseconds < newEventEndDTInMilliseconds) 
+                && (eventStartDTInMilliseconds < newEventEndDTInMilliseconds && newEventEndDTInMilliseconds <= eventEndDTInMilliseconds)
             ) {
                 error = 'Cannot overlap event: newStartDT existingStartDT newEndDT existingEndDT';
             } else if (
-                (eventStartDTInMilliseconds <= newEventStartDTInMilliseconds && newEventStartDTInMilliseconds <= eventEndDTInMilliseconds) 
-                && (newEventStartDTInMilliseconds <= eventEndDTInMilliseconds && eventEndDTInMilliseconds <= newEventEndDTInMilliseconds)
+                (eventStartDTInMilliseconds <= newEventStartDTInMilliseconds && newEventStartDTInMilliseconds < eventEndDTInMilliseconds) 
+                && (newEventStartDTInMilliseconds < eventEndDTInMilliseconds && eventEndDTInMilliseconds <= newEventEndDTInMilliseconds)
             ) {
                 error = 'Cannot overlap event: existingStartDT newStartDT existingEndDT newEndDT';
             } else if (
-                (eventStartDTInMilliseconds <= newEventStartDTInMilliseconds && newEventStartDTInMilliseconds <= eventEndDTInMilliseconds) 
-                && (eventStartDTInMilliseconds <= newEventEndDTInMilliseconds && newEventEndDTInMilliseconds <= eventEndDTInMilliseconds)
+                (eventStartDTInMilliseconds <= newEventStartDTInMilliseconds && newEventStartDTInMilliseconds < eventEndDTInMilliseconds) 
+                && (eventStartDTInMilliseconds < newEventEndDTInMilliseconds && newEventEndDTInMilliseconds <= eventEndDTInMilliseconds)
             ) {
                 error = 'Cannot overlap event: existingStartDT newStartDT newEndDT existingEndDT';
             }
