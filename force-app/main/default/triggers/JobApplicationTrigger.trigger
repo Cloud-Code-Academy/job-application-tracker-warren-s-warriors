@@ -5,12 +5,13 @@ trigger JobApplicationTrigger on Job_Application__c (before insert, before updat
         when BEFORE_INSERT {
             jobApplicationTriggerHandler.validateApplicationAndFollowUpDate(Trigger.new);
             jobApplicationTriggerHandler.setPrimaryContact(Trigger.new);
-            jobApplicationTriggerHandler.calculatePayrollTaxes(Trigger.new);
+            TaxCalculation.calculatePayrollTaxes(Trigger.new);
         }
 
         when BEFORE_UPDATE {
             jobApplicationTriggerHandler.validateApplicationAndFollowUpDate(Trigger.new);
             jobApplicationTriggerHandler.setPrimaryContact(Trigger.new);
+            TaxCalculation.calculatePayrollTaxes(Trigger.new);
         }
 
         when AFTER_INSERT {
