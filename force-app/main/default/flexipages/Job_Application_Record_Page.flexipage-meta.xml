@@ -276,8 +276,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Salary__c</fieldItem>
-                <identifier>RecordSalary_cField</identifier>
+                <fieldItem>Record.Primary_Contact__c</fieldItem>
+                <identifier>RecordPrimary_Contact_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -286,8 +286,8 @@
                     <name>uiBehavior</name>
                     <value>none</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Primary_Contact__c</fieldItem>
-                <identifier>RecordPrimary_Contact_cField</identifier>
+                <fieldItem>Record.Job_Id__c</fieldItem>
+                <identifier>RecordJob_Id_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <name>Facet-dd618509-860f-43b8-9670-01e8ac96c559</name>
@@ -315,6 +315,88 @@
             </componentInstance>
         </itemInstances>
         <name>Facet-9b980575-1f34-4153-a489-26a4ba21bf03</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>none</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Salary__c</fieldItem>
+                <identifier>RecordSalary_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Federal_Income_Tax__c</fieldItem>
+                <identifier>RecordFederal_Income_Tax_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Medicare_Withholding__c</fieldItem>
+                <identifier>RecordMedicare_Withholding_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-528e2ae1-10b5-4bb6-8056-63a5b7e22f9a</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Take_Home_Pay__c</fieldItem>
+                <identifier>RecordTake_Home_Pay_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Social_Security_Tax__c</fieldItem>
+                <identifier>RecordSocial_Security_Tax_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-d42d2373-3630-4212-bb37-ced68ea41711</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-528e2ae1-10b5-4bb6-8056-63a5b7e22f9a</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column13</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-d42d2373-3630-4212-bb37-ced68ea41711</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:column</componentName>
+                <identifier>flexipage_column14</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-d1b5107f-124b-40f2-bbbf-0dd098c67969</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -410,10 +492,28 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Position Information</value>
+                    <value>Job Information</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection2</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>columns</name>
+                    <value>Facet-d1b5107f-124b-40f2-bbbf-0dd098c67969</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>horizontalAlignment</name>
+                    <value>false</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>label</name>
+                    <value>Financial Information</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:fieldSection</componentName>
+                <identifier>flexipage_fieldSection7</identifier>
             </componentInstance>
         </itemInstances>
         <itemInstances>
@@ -432,12 +532,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection4</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>force:recordDetailPanelMobile</componentName>
-                <identifier>force_recordDetailPanelMobile</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-c42338c6-6459-4df2-a870-659cb78220b9</name>

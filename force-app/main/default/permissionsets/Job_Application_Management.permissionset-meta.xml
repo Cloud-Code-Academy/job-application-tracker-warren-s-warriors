@@ -13,6 +13,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Job_Application__c.Email__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Job_Application__c.Federal_Income_Tax__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -28,6 +33,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Job_Application__c.Job_Id__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Job_Application__c.Job_Type__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -38,7 +48,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Job_Application__c.Medicare_Taxes__c</field>
+        <field>Job_Application__c.Medicare_Withholding__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

@@ -3,7 +3,7 @@
     <fullName>Take_Home_Pay__c</fullName>
     <description>Estimate of take-home pay</description>
     <externalId>false</externalId>
-    <formula>Salary__c - Federal_Income_Tax__c - Social_Security_Tax__c - Medicare_Taxes__c</formula>
+    <formula>Salary__c - Federal_Income_Tax__c - Social_Security_Tax__c - Medicare_Withholding__c</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Take-Home Pay</label>
     <precision>18</precision>
