@@ -443,15 +443,4 @@ public with sharing class JobApplicationTriggerHandler {
 
         return primaryContactId;
     }
-
-    // handler method to calculate payroll taxes > Federal / Social Security / Medicare
-    public void calculatePayrollTaxes(List<Job_Application__c> triggerDotNew) {
-        for (Job_Application__c newJobApplication : triggerDotNew) {
-            if(newJobApplication.Salary__c != null) {
-                newJobApplication.Federal_Income_Tax__c = Taxes.calculateFederalTaxes(newJobApplication.Salary__c);
-                newJobApplication.Medicare_Taxes__c = Taxes.calcMedicareTaxes(newJobApplication.Salary__c);
-                newJobApplication.Social_Security_Tax__c = Taxes.calcSocialSecurityTaxes(newJobApplication.Salary__c);
-            }
-        }
-    }
 }
