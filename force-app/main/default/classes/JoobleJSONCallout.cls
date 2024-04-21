@@ -105,12 +105,12 @@ public with sharing class JoobleJSONCallout {
                 } catch (TypeException e) {
                     System.debug('Cannot put non-numerical value in salary field — see salary in job description field | Exception Type: ' + e.getTypeName() + ' | Exception Message: ' + e.getMessage());
 
-                    String note = '\n\n Salary as of ' + Datetime.now().format() + ': ' + salary;
+                    String salaryInfo = '\n\n Salary as of ' + Datetime.now().format() + ': ' + salary;
 
                     if (String.isBlank(jobApplicationToUpsert.Job_Description__c)) {
-                        jobApplicationToUpsert.Job_Description__c = note.trim();
+                        jobApplicationToUpsert.Job_Description__c = salaryInfo.trim();
                     } else {
-                        jobApplicationToUpsert.Job_Description__c += note;
+                        jobApplicationToUpsert.Job_Description__c += salaryInfo;
                     }
                 }
             }
@@ -129,6 +129,8 @@ public with sharing class JoobleJSONCallout {
 
             jobApplicationsToUpsert.add(jobApplicationToUpsert);
         }
+
+        System.debug('jobApplicationsToUpsert = ' + jobApplicationsToUpsert);
 
         return jobApplicationsToUpsert;
     }
