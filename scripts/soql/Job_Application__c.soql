@@ -1,0 +1,1 @@
+SELECT Name, Position_Title__c, Company__c, Location__c, Job_Description__c, Notes__c, URL__c, Job_Id__c, CreatedDate FROM Job_Application__c ORDER BY Name ASC
