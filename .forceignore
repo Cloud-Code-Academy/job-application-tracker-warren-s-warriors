@@ -75,6 +75,5 @@ package.xml
 **/queues/**
 **/reportTypes/**
 **/roles/**
-**/settings/DevHub**
 **/sharingRules/**
 **/sites/**
