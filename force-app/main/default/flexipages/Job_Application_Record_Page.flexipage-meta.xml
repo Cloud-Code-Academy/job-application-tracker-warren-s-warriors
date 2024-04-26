@@ -348,20 +348,6 @@
                 <identifier>RecordMedicare_Withholding_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-528e2ae1-10b5-4bb6-8056-63a5b7e22f9a</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <fieldInstance>
-                <fieldInstanceProperties>
-                    <name>uiBehavior</name>
-                    <value>readonly</value>
-                </fieldInstanceProperties>
-                <fieldItem>Record.Take_Home_Pay__c</fieldItem>
-                <identifier>RecordTake_Home_Pay_cField</identifier>
-            </fieldInstance>
-        </itemInstances>
         <itemInstances>
             <fieldInstance>
                 <fieldInstanceProperties>
@@ -372,7 +358,17 @@
                 <identifier>RecordSocial_Security_Tax_cField</identifier>
             </fieldInstance>
         </itemInstances>
-        <name>Facet-d42d2373-3630-4212-bb37-ced68ea41711</name>
+        <itemInstances>
+            <fieldInstance>
+                <fieldInstanceProperties>
+                    <name>uiBehavior</name>
+                    <value>readonly</value>
+                </fieldInstanceProperties>
+                <fieldItem>Record.Take_Home_Pay__c</fieldItem>
+                <identifier>RecordTake_Home_Pay_cField</identifier>
+            </fieldInstance>
+        </itemInstances>
+        <name>Facet-528e2ae1-10b5-4bb6-8056-63a5b7e22f9a</name>
         <type>Facet</type>
     </flexiPageRegions>
     <flexiPageRegions>
@@ -384,16 +380,6 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:column</componentName>
                 <identifier>flexipage_column13</identifier>
-            </componentInstance>
-        </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-d42d2373-3630-4212-bb37-ced68ea41711</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:column</componentName>
-                <identifier>flexipage_column14</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-d1b5107f-124b-40f2-bbbf-0dd098c67969</name>
@@ -506,11 +492,11 @@
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>horizontalAlignment</name>
-                    <value>false</value>
+                    <value>true</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
-                    <value>Financial Information</value>
+                    <value>Annual Take Home Pay</value>
                 </componentInstanceProperties>
                 <componentName>flexipage:fieldSection</componentName>
                 <identifier>flexipage_fieldSection7</identifier>
@@ -562,16 +548,6 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
-                <componentName>calculateTakeHome</componentName>
-                <identifier>c_calculateTakeHome</identifier>
-            </componentInstance>
-        </itemInstances>
-        <name>Facet-fb51d044-57ee-433d-925b-4554e6f11fc8</name>
-        <type>Facet</type>
-    </flexiPageRegions>
-    <flexiPageRegions>
-        <itemInstances>
-            <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
                     <value>false</value>
@@ -606,20 +582,6 @@
                 <identifier>flexipage_tab</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentInstanceProperties>
-                    <name>body</name>
-                    <value>Facet-fb51d044-57ee-433d-925b-4554e6f11fc8</value>
-                </componentInstanceProperties>
-                <componentInstanceProperties>
-                    <name>title</name>
-                    <value>Take Home Calculator</value>
-                </componentInstanceProperties>
-                <componentName>flexipage:tab</componentName>
-                <identifier>flexipage_tab3</identifier>
-            </componentInstance>
-        </itemInstances>
         <name>Facet-7ef608cd-e4d8-4803-8a6e-3077bffa1b00</name>
         <type>Facet</type>
     </flexiPageRegions>
@@ -638,6 +600,12 @@
         <type>Region</type>
     </flexiPageRegions>
     <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
+                <componentName>calculateTakeHome</componentName>
+                <identifier>c_calculateTakeHome2</identifier>
+            </componentInstance>
+        </itemInstances>
         <itemInstances>
             <componentInstance>
                 <componentInstanceProperties>

@@ -94,12 +94,9 @@ export default class JobSearchResult extends LightningElement {
 
     recordIds = [];
 
-    @wire(queryJobs)
-    jobs;
+    @wire(queryJobs) jobs;
 
     handleSort(event) {
-        // console.log('handleSort');
-
         const { fieldName: sortedBy, sortDirection } = event.detail;
         const CLONE_DATA = [...this.jobs.data];
 
@@ -111,8 +108,6 @@ export default class JobSearchResult extends LightningElement {
     }
 
     sortBy(field, reverse, primer) {
-        // console.log('sortBy');
-
         const KEY = primer 
             ? function (x) { return primer(x[field]); }
             : function (x) { return x[field]; };
@@ -126,8 +121,6 @@ export default class JobSearchResult extends LightningElement {
     }
 
     async handleRowAction(event) {
-        // console.log('handleRowAction');
-
         const ACTION = event.detail.action;
         const ROW = event.detail.row;
 
@@ -177,9 +170,43 @@ export default class JobSearchResult extends LightningElement {
         }
     }
 
-    handleRowSelection(event) {
-        // console.log('handleRowSelection');
+    handleErrorWhileUpsertingRecord(e) {
+        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
 
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Error while upserting records', 
+                message: e.body.message, 
+                variant: 'error'
+            })
+        );
+    }
+
+    handleErrorWhileDeletingRecord(e) {
+        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Error while deleting records', 
+                message: e.body.message, 
+                variant: 'error'
+            })
+        );
+    }
+
+    handleErrorWhileRefreshingRecord(e) {
+        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Error while refreshing records', 
+                message: e.body.message, 
+                variant: 'error'
+            })
+        );
+    }
+
+    handleRowSelection(event) {
         const SELECTED_ROWS = event.detail.selectedRows;
         const VALUE = event.detail.config.value;
 
@@ -210,8 +237,6 @@ export default class JobSearchResult extends LightningElement {
     }
 
     async handleUpsertJobApplicationAndDeleteJobAndRefreshRecord(event) {
-        // console.log('handleUpsertJobApplicationAndDeleteJobAndRefreshRecord');
-
         event.preventDefault();
 
         try {
@@ -241,44 +266,5 @@ export default class JobSearchResult extends LightningElement {
         } catch (e) {
             this.handleErrorWhileRefreshingRecord(e);
         }
-    }
-
-    handleErrorWhileUpsertingRecord(e) {
-        // console.log('handleErrorWhileUpsertingRecord');
-        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
-
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: 'Error while upserting records', 
-                message: e.body.message, 
-                variant: 'error'
-            })
-        );
-    }
-
-    handleErrorWhileDeletingRecord(e) {
-        // console.log('handleErrorWhileDeletingRecord');
-        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
-
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: 'Error while deleting records', 
-                message: e.body.message, 
-                variant: 'error'
-            })
-        );
-    }
-
-    handleErrorWhileRefreshingRecord(e) {
-        // console.log('handleErrorWhileRefreshingRecord');
-        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
-
-        this.dispatchEvent(
-            new ShowToastEvent({
-                title: 'Error while refreshing records', 
-                message: e.body.message, 
-                variant: 'error'
-            })
-        );
     }
 }

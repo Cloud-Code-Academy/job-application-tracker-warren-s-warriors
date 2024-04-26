@@ -25,7 +25,7 @@ private with sharing class JobApplicationControllerTest {
             Snippet__c = '', 
             Salary__c = '$90.1 - $95.9 per hour', 
             Source__c = '', 
-            Type__c = 'Part-time', 
+            Type__c = 'Temporary', 
             Link__c = 'https://careers.salesforce.com/en/jobs', 
             Company__c = 'Salesforce', 
             Id__c = '-2885668755075351000'
@@ -53,7 +53,7 @@ private with sharing class JobApplicationControllerTest {
             Snippet__c = '', 
             Salary__c = '', 
             Source__c = '', 
-            Type__c = 'Contract', 
+            Type__c = 'Temporary', 
             Link__c = 'https://jooble.org/desc/6407669124240902847?ckey=Salesforce+Developer&rgn=10&pos=20&groupId=40906&elckey=6560772729242811828&p=1&aq=426136413298815402&cid=3389&jobAge=133&relb=100&brelb=100&bscr=7124.704&scr=7124.704000000001', 
             Company__c = 'Hirekeyz Inc', 
             Updated__c = Datetime.now() - 30, 
@@ -137,9 +137,7 @@ private with sharing class JobApplicationControllerTest {
                 )
                 AND Type__c IN (
                     'Full-time', 
-                    'Part-time', 
-                    'Temporary', 
-                    'Contract'
+                    'Temporary'
                 )
                 AND Company__c IN (
                     'CodeEveryDay', 

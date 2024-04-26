@@ -73,12 +73,7 @@ public with sharing class JobApplicationController {
 
             if (
                 !String.isBlank(job.Type__c) 
-                && (job.Type__c == 'Full-time' 
-                    || job.Type__c == 'Part-time' 
-                    || job.Type__c == 'Contract' 
-                    || job.Type__c == 'Internship' 
-                    || job.Type__c == 'Temporary'
-                )
+                && (job.Type__c == 'Full-time' || job.Type__c == 'Temporary')
             ) {
                 jobApplicationToUpsert.Job_Type__c = job.Type__c;
             }
