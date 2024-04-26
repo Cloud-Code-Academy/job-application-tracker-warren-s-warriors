@@ -562,6 +562,16 @@
     <flexiPageRegions>
         <itemInstances>
             <componentInstance>
+                <componentName>calculateTakeHome</componentName>
+                <identifier>c_calculateTakeHome</identifier>
+            </componentInstance>
+        </itemInstances>
+        <name>Facet-fb51d044-57ee-433d-925b-4554e6f11fc8</name>
+        <type>Facet</type>
+    </flexiPageRegions>
+    <flexiPageRegions>
+        <itemInstances>
+            <componentInstance>
                 <componentInstanceProperties>
                     <name>active</name>
                     <value>false</value>
@@ -594,6 +604,20 @@
                 </componentInstanceProperties>
                 <componentName>flexipage:tab</componentName>
                 <identifier>flexipage_tab</identifier>
+            </componentInstance>
+        </itemInstances>
+        <itemInstances>
+            <componentInstance>
+                <componentInstanceProperties>
+                    <name>body</name>
+                    <value>Facet-fb51d044-57ee-433d-925b-4554e6f11fc8</value>
+                </componentInstanceProperties>
+                <componentInstanceProperties>
+                    <name>title</name>
+                    <value>Take Home Calculator</value>
+                </componentInstanceProperties>
+                <componentName>flexipage:tab</componentName>
+                <identifier>flexipage_tab3</identifier>
             </componentInstance>
         </itemInstances>
         <name>Facet-7ef608cd-e4d8-4803-8a6e-3077bffa1b00</name>
