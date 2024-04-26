@@ -2,7 +2,6 @@ import { LightningElement , track} from 'lwc';
 import calculateFederalTax from '@salesforce/apex/TaxCalculation.calculateFederalTax';
 import calculateSocialSecurityTax from '@salesforce/apex/TaxCalculation.calculateSocialSecurityTax';
 import calculateMedicareTax from '@salesforce/apex/TaxCalculation.calculateMedicareTax';
-import inputWidth from './style.css'; 
 export default class CalculateTakeHome extends LightningElement {
     @track salary;
     @track fedTax;
