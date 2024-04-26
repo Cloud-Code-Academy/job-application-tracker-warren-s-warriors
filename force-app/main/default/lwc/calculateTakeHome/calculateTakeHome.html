@@ -1,0 +1,176 @@
+<template>
+    <lightning-card>
+        <div class="slds-var-m-top_medium">
+            <lightning-card>
+                <div class="slds-var-p-around_medium">
+                    <form>
+                        <lightning-input 
+                            type="number" 
+                            label="Enter Salary to calculate take home pay:" 
+                            
+                            value={salary} 
+                            onchange={handleSalaryChange}></lightning-input>
+                            <!-- slds-var-p-around_medium  -->
+                                <div class="slds-var-m-right_large slds-var-m-top_medium"> 
+                                    <lightning-button     
+                                        variant="brand-outline" 
+                                        icon-position="left"
+                                        label="Submit" 
+                                        onclick={handleSubmission}>
+                                    </lightning-button>
+                                    <span class="slds-var-m-left_large">
+                                        <lightning-button
+                                        variant="brand-outline" 
+                                        icon-position="right"
+                                        label="Reset" 
+                                        type = "reset" 
+                                        title="Reset Salary" 
+                                        onclick={resetHandler}>
+                                    </lightning-button>
+                                    </span>
+                                    
+                                </div>
+                    </form>
+                </div>
+            </lightning-card>
+            <!-- Display tax information and takeHomePay when submit button is clicked -->
+            <template if:true={isSubmitted}>
+                <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" aria-label="Example table of Opportunities with striped rows">
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" 
+                                scope="col">
+                                    <div 
+                                        class="slds-truncate" 
+                                        title="Salary and Taxes">Salary and Taxes
+                                    </div>
+                            </th>
+                            <th 
+                                class="" 
+                                scope="col">
+                                 <div 
+                                    class="slds-truncate" 
+                                    title="Values">Values
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <th 
+                                data-label="Salary and Taxes" 
+                                scope="row">
+                                    <div 
+                                        class="slds-truncate" 
+                                        title="Salary">
+                                            <a href="#" tabindex="-1">Salary</a>
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div 
+                                    class="slds-truncate" 
+                                    title="Salary"><lightning-formatted-number 
+                                    value={salary} 
+                                    format-style="currency" 
+                                    currency-code="USD"></lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th 
+                                data-label="Salary and Taxes" 
+                                scope="row">
+                                    <div 
+                                        class="slds-truncate" 
+                                        title="Federal Taxes">
+                                            <a href="#" tabindex="-1">Federal Taxes</a>
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div 
+                                    class="slds-truncate"
+                                    title="Federal Taxes"><lightning-formatted-number 
+                                    value={fedTax} 
+                                    format-style="currency" 
+                                    currency-code="USD"></lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th 
+                                data-label="Salary and Taxes" 
+                                scope="row">
+                                    <div 
+                                        class="slds-truncate" 
+                                        title="Social Security Taxes">
+                                            <a href="#" tabindex="-1">Social Security Taxes</a>
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div 
+                                    class="slds-truncate" 
+                                    title="Social Security Taxes"><lightning-formatted-number value={ssTax} format-style="currency" 
+                                    currency-code="USD"></lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Salary and Taxes" 
+                                scope="row">
+                                    <div class="slds-truncate" 
+                                         title="Medicare Taxes">
+                                            <a href="#" tabindex="-1">Medicare Taxes</a>
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate" 
+                                     title="Medicare Taxes">
+                                        <lightning-formatted-number 
+                                            value={medicareTax} 
+                                            format-style="currency" 
+                                            currency-code="USD">
+                                        </lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Salary and Taxes" 
+                                scope="row">
+                                    <div class="slds-truncate" 
+                                         title="Take Home Pay (Monthly)">
+                                        <a href="#" tabindex="-1">Take Home Pay (Monthly)</a>
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate" 
+                                     title="Take Home Pay (Monthly)">
+                                     <lightning-formatted-number 
+                                        value={takeHomePayMonthly} 
+                                        format-style="currency" 
+                                        currency-code="USD">
+                                    </lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Salary and Taxes" scope="row">
+                                <div class="slds-truncate" title="Take Home Pay (Monthly)">
+                                    <a href="#" tabindex="-1">Take Home Pay (Monthly)</a>
+                                </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate" 
+                                     title="Take Home Pay (Monthly)">
+                                     <lightning-formatted-number 
+                                        value={takeHomePayYearly} 
+                                        format-style="currency" 
+                                        currency-code="USD">
+                                    </lightning-formatted-number></div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </template>
+        </div>
+    </lightning-card>   
+</template>
