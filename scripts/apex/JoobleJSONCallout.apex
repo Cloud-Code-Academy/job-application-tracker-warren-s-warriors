@@ -10,12 +10,12 @@ req.setMethod('POST');
 
 Map<String, Object> reqBodyMap = new Map<String, Object>{
     'keywords' => 'Junior Salesforce Developer', 
-    'location' => 'New York', 
+    'location' => 'Remote', 
     'radius' => '25', 
     'salary' => 50000, 
     'datecreatedfrom' => '2024-04-15', 
     'page' => '1', 
-    'resultonpage' => '50'
+    'resultonpage' => '100'
 };
 
 req.setBody(JSON.serialize(reqBodyMap));

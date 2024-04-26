@@ -1,9 +1,9 @@
 JoobleJSONCallout.makePOSTCallout(
     'Junior Salesforce Developer', 
-    'New York', 
+    'Remote', 
     '25', 
-    70000, 
+    50000, 
     '2024-04-15', 
     '1', 
-    '50'
+    '100'
 );
