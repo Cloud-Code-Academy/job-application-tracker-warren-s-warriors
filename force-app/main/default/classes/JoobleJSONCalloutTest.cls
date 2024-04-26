@@ -10,12 +10,12 @@ private with sharing class JoobleJSONCalloutTest {
 
         JoobleJSONCallout.makePOSTCallout(
             'Junior Salesforce Developer', 
-            'Florida', 
+            'Remote', 
             '25', 
             50000, 
             '2024-04-15', 
             '1', 
-            '50'
+            '100'
         );
 
         Test.stopTest();
@@ -46,7 +46,6 @@ private with sharing class JoobleJSONCalloutTest {
                 )
                 AND Type__c IN (
                     'Full-time', 
-                    'Part-time', 
                     'Temporary'
                 )
                 AND Company__c IN (
