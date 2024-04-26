@@ -410,7 +410,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsNegotiating_UExpectTwoTasksCreated() {
+    private static void createTaskWhenStatusIsNegotiating_ExpectTwoTasksCreated() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 

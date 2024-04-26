@@ -1,19 +1,9 @@
 @IsTest
 private with sharing class JoobleJSONCalloutTest {
     @IsTest
-    private static void makePOSTCallout_ExpectTwoRetrievedAccountsAndTwoJobApplicationsWithSavedStatusCreated() {
+    private static void makePOSTCallout_ExpectThreeRetrievedJobs() {
         // GIVEN
         Test.setMock(HttpCalloutMock.class, new JoobleJSONCalloutMockGenerator());
-
-        Account accSalesforce = new Account(Name = 'Salesforce');
-
-        insert accSalesforce;
-
-        insert new Job_Application__c(
-            Position_Title__c = 'Salesforce Developer', 
-            Company__c = accSalesforce.Id, 
-            Job_Id__c = '-2885668755075351000'
-        );
 
         // WHEN
         Test.startTest();
@@ -21,8 +11,8 @@ private with sharing class JoobleJSONCalloutTest {
         JoobleJSONCallout.makePOSTCallout(
             'Junior Salesforce Developer', 
             'Florida', 
-            '30', 
-            70000, 
+            '25', 
+            50000, 
             '2024-04-15', 
             '1', 
             '50'
@@ -31,38 +21,46 @@ private with sharing class JoobleJSONCalloutTest {
         Test.stopTest();
 
         // THEN
-        List<Account> retrievedAccts = [
+        List<Job__c> retrievedJobs = [
             SELECT 
-                Id, 
-                Name 
-            FROM Account 
-            WHERE Name IN (
+                Title__c, 
+                Location__c, 
+                Salary__c, 
+                Source__c, 
+                Type__c, 
+                Link__c, 
+                Company__c, 
+                Id__c 
+            FROM Job__c 
+            WHERE Title__c LIKE '%Salesforce Developer%' 
+                AND Location__c LIKE '%FL%' 
+                AND Salary__c IN (
+                    '$1,234 per week', 
+                    '$90.1 - $95.9 per hour', 
+                    '$90.25k - $100.75k'
+                )
+                AND Source__c IN (
+                    'nowhere.com', 
+                    'somewhere.com', 
+                    'drjobs.ae'
+                )
+                AND Type__c IN (
+                    'Full-time', 
+                    'Part-time', 
+                    'Temporary'
+                )
+                AND Company__c IN (
+                    'CodeEveryDay', 
                     'Salesforce', 
                     'Hirekeyz Inc'
                 )
-        ];
-
-        System.assertEquals(2, retrievedAccts.size(), 'Expect 2 retrieved accounts');
-
-        List<Job_Application__c> retrievedJobApplications = [
-            SELECT 
-                Status__c, 
-                Position_Title__c, 
-                Location__c, 
-                Salary__c, 
-                Job_Description__c, 
-                URL__c, 
-                Job_Id__c 
-            FROM Job_Application__c 
-            WHERE Status__c = 'Saved' 
-                AND Position_Title__c LIKE '%Salesforce Developer%' 
-                AND Location__c LIKE '%FL%' 
-                AND Job_Id__c IN (
+                AND Id__c IN (
+                    '-1234567890123456789', 
                     '-2885668755075351000', 
                     '6407669124240903000'
                 )
         ];
 
-        System.assertEquals(2, retrievedJobApplications.size(), 'Expect 2 job applications with saved status created');
+        System.assertEquals(3, retrievedJobs.size(), 'Expect 3 retrieved jobs');
     }
 }

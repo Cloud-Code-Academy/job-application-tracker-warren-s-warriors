@@ -1,5 +1,5 @@
 public with sharing class JoobleJSONCallout {
-    @AuraEnabled(cacheable=true)
+    @AuraEnabled
     @future(callout=true)
     public static void makePOSTCallout(
         String keywords, 
@@ -20,7 +20,7 @@ public with sharing class JoobleJSONCallout {
 
         req.setMethod('POST');
 
-        Map<String, Object> reqBodyMap = new Map<String,Object>{
+        Map<String, Object> reqBodyMap = new Map<String, Object>{
             'keywords' => keywords, 
             'location' => location, 
             'radius' => radius, 
@@ -36,32 +36,30 @@ public with sharing class JoobleJSONCallout {
 
         HttpResponse res = http.send(req);
 
-        String resBody = res.getBody().replaceAll('\n', '').replaceAll('\r', '').replaceAll('<b>', '').replaceAll('</b>', '').replaceAll('&nbsp;', '');
+        String resBody = res.getBody().stripHtmlTags();
 
         System.debug('resBody = ' + resBody);
 
         if (res.getStatusCode() == 200) {
-            List<Job_Application__c> jobApplications = createJobApplicationsFromJson(resBody);
+            delete [SELECT Id FROM Job__c];
 
-            upsert jobApplications Job_Id__c;
+            List<Job__c> jobs = createJobsFromJson(resBody);
+
+            upsert jobs Id__c;
         } else {
             System.debug('HTTP request failed. Status Code: ' + res.getStatusCode() + ' | Response Body: ' + resBody);
         }
     }
 
-    private static List<Job_Application__c> createJobApplicationsFromJson(String resBody) {
-        Map<String, Object> resBodyMap = (Map<String, Object>) JSON.deserializeUntyped(resBody);
-
-        List<Object> jobs = (List<Object>) resBodyMap.get('jobs');
-
-        List<Job_Application__c> jobApplicationsToUpsert = new List<Job_Application__c>();
+    private static List<Job__c> createJobsFromJson(String resBody) {
+        List<Object> jobs = getJobsObjectsFromJson(resBody);
 
         Integer loopCount = 0;
 
+        List<Job__c> jobsToUpsert = new List<Job__c>();
+
         for (Object job : jobs) {
             loopCount++;
-
-            Job_Application__c jobApplicationToUpsert = new Job_Application__c(Status__c = 'Saved');
 
             Map<String, Object> jobFieldMap = (Map<String, Object>) job;
 
@@ -69,100 +67,83 @@ public with sharing class JoobleJSONCallout {
             String location = String.valueOf(jobFieldMap.get('location'));
             String snippet = String.valueOf(jobFieldMap.get('snippet'));
             String salary = String.valueOf(jobFieldMap.get('salary'));
+            String source = String.valueOf(jobFieldMap.get('source'));
+            String jobType = String.valueOf(jobFieldMap.get('type'));
             String link = String.valueOf(jobFieldMap.get('link'));
             String company = String.valueOf(jobFieldMap.get('company'));
-            String id = String.valueOf(jobFieldMap.get('id'));
-    
+            String updated = String.valueOf(jobFieldMap.get('updated'));
+            String jobId = String.valueOf(jobFieldMap.get('id'));
+
+            Datetime updatedDT = Datetime.valueof(updated.substringBefore('.').replace('T', ' '));
+
             System.debug('----------BEGIN LOOP ' + loopCount + ' ----------');
-    
+
             System.debug('title = ' + title);
             System.debug('location = ' + location);
             System.debug('snippet = ' + snippet);
             System.debug('salary = ' + salary);
+            System.debug('source = ' + source);
+            System.debug('type = ' + jobType);
             System.debug('link = ' + link);
             System.debug('company = ' + company);
-            System.debug('id = ' + id);
-    
+            System.debug('updatedDT = ' + updatedDT);
+            System.debug('jobId = ' + jobId);
+
             System.debug('----------END LOOP ' + loopCount + ' ----------');
 
+            Job__c jobToUpsert = new Job__c();
+
             if (!String.isBlank(title)) {
-                jobApplicationToUpsert.Position_Title__c = title;
+                jobToUpsert.Title__c = title;
             }
 
-            if (!String.isBlank(location)
-            ) {
-                jobApplicationToUpsert.Location__c = location;
+            if (!String.isBlank(location)) {
+                jobToUpsert.Location__c = location;
             }
 
             if (!String.isBlank(snippet)) {
-                jobApplicationToUpsert.Job_Description__c = snippet;
+                jobToUpsert.Snippet__c = snippet;
             }
 
-            if (!String.isBlank(salary)
-            ) {
-                try {
-                    jobApplicationToUpsert.Salary__c = Decimal.valueOf(salary);
-                } catch (TypeException e) {
-                    System.debug('Cannot put non-numerical value in salary field — see salary in job description field | Exception Type: ' + e.getTypeName() + ' | Exception Message: ' + e.getMessage());
+            if (!String.isBlank(salary)) {
+                jobToUpsert.Salary__c = salary;
+            }
 
-                    String salaryInfo = '\n\n Salary as of ' + Datetime.now().format() + ': ' + salary;
+            if (!String.isBlank(source)) {
+                jobToUpsert.Source__c = source;
+            }
 
-                    if (String.isBlank(jobApplicationToUpsert.Job_Description__c)) {
-                        jobApplicationToUpsert.Job_Description__c = salaryInfo.trim();
-                    } else {
-                        jobApplicationToUpsert.Job_Description__c += salaryInfo;
-                    }
-                }
+            if (!String.isBlank(jobType)) {
+                jobToUpsert.Type__c = jobType;
             }
 
             if (!String.isBlank(link)) {
-                jobApplicationToUpsert.URL__c = link;
+                jobToUpsert.Link__c = link;
             }
 
             if (!String.isBlank(company)) {
-                jobApplicationToUpsert.Company__c = getAccId(company);
+                jobToUpsert.Company__c = company;
             }
 
-            if (!String.isBlank(id)) {
-                jobApplicationToUpsert.Job_Id__c = id;
+            if (!String.isBlank(updated)) {
+                jobToUpsert.Updated__c = updatedDT;
             }
 
-            jobApplicationsToUpsert.add(jobApplicationToUpsert);
+            if (!String.isBlank(jobId)) {
+                jobToUpsert.Id__c = jobId;
+            }
+
+            jobsToUpsert.add(jobToUpsert);
         }
 
-        System.debug('jobApplicationsToUpsert = ' + jobApplicationsToUpsert);
+        System.debug('jobsToUpsert = ' + jobsToUpsert);
 
-        return jobApplicationsToUpsert;
+        return jobsToUpsert;
     }
 
-    private static String getAccId(String company) {
-        String accId;
+    private static List<Object> getJobsObjectsFromJson(String resBody) {
+        Map<String, Object> resBodyMap = (Map<String, Object>) JSON.deserializeUntyped(resBody);
 
-        if (company != null) {
-            List<Account> retrievedAccts = [
-                SELECT 
-                    Id, 
-                    Name 
-                FROM Account 
-                WHERE Name = :company 
-                LIMIT 1
-            ];
-
-            if (retrievedAccts.isEmpty()) {
-                accId = createAcc(company);
-            } else {
-                accId = retrievedAccts[0].Id;
-            }
-        }
-
-        return accId;
-    }
-
-    private static Id createAcc(String company) {
-        Account acctToInsert = new Account(Name = company);
-
-        insert acctToInsert;
-
-        return acctToInsert.Id;
+        return (List<Object>) resBodyMap.get('jobs');
     }
 }
