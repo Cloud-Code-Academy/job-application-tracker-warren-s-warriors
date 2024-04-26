@@ -49,11 +49,27 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>JobApplicationController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>JobApplicationControllerTest</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>JobApplicationTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>JobApplicationTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>JobController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>JobControllerTest</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -80,7 +96,7 @@
         <apexClass>TestDataFactory</apexClass>
         <enabled>true</enabled>
     </classAccesses>
-    <description>Permission Set for Apex Class Access Management</description>
+    <description>Permission Set for Apex Class Access</description>
     <hasActivationRequired>false</hasActivationRequired>
     <label>Apex Class Access Management</label>
 </PermissionSet>

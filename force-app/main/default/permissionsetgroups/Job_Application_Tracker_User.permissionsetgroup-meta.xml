@@ -12,6 +12,7 @@
     <permissionSets>External_Credential_Principal_Access_Management</permissionSets>
     <permissionSets>Job_Application_Contact_Management</permissionSets>
     <permissionSets>Job_Application_Management</permissionSets>
+    <permissionSets>Job_Management</permissionSets>
     <permissionSets>Task_Management</permissionSets>
     <permissionSets>User_External_Credential_Management</permissionSets>
     <status>Updated</status>
