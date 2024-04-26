@@ -8,80 +8,74 @@ import makePOSTCallout from '@salesforce/apex/JoobleJSONCallout.makePOSTCallout'
 export default class JobSearch extends LightningElement {
     keywords;
     location;
-    radius = 25;
+    miles = 25;
+    kilometers;
     salary = 50000;
     datecreatedfrom;
     page = 1;
-    resultonpage = 20;
 
-    @wire(queryJobs)
-    jobs;
+    @wire(queryJobs) jobs;
+
+    get lastWeek() {
+        const TODAY = new Date();
+
+        TODAY.setDate(TODAY.getDate() - 7);
+
+        const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+        const YEAR = TODAY.getFullYear();
+        const MONTH = MONTHS[TODAY.getMonth()];
+        const DAY = TODAY.getDate();
+
+        return `${MONTH} ${DAY}, ${YEAR}`;
+    }
 
     handleKeywordsChange(event) {
-        // console.log('handleKeywordsChange');
-
         this.keywords = event.target.value;
     }
 
     handleLocationChange(event) {
-        // console.log('handleLocationChange');
-
         this.location = event.target.value;
     }
 
     handleRadiusChange(event) {
-        // console.log('handleRadiusChange');
+        const MILES = event.target.value;
 
-        this.radius = this.convertMilesToKilometers(event.target.value);
+        this.miles = MILES;
+        this.kilometers = this.convertMilesToKilometers(MILES);
     }
 
     convertMilesToKilometers(miles) {
-        // console.log('convertMilesToKilometers');
-
         return miles * 1.609344;
     }
 
     handleSalaryChange(event) {
-        // console.log('handleSalaryChange');
-
         this.salary = event.target.value;
     }
 
     handleDateCreatedFromChange(event) {
-        // console.log('handleDateCreatedFromChange');
-
         this.datecreatedfrom = event.target.value;
     }
 
     handlePageChange(event) {
-        // console.log('handlePageChange');
-
         this.page = event.target.value;
     }
 
-    handleResultOnPageChange(event) {
-        // console.log('handleResultOnPageChange');
-
-        this.resultonpage = event.target.value;
-    }
-
     async handleSearchJob(event) {
-        // console.log('handleSearchJob');
-
         event.preventDefault();
 
         const KEYWORDS = this.keywords;
-        const TODAY = new Date();
+        const LOCATION = this.location;
+        const LAST_WEEK = new Date(this.lastWeek).toISOString().slice(0, 10);
 
-        TODAY.setMonth(TODAY.getMonth() - 1);
-
-        const LAST_MONTH = TODAY.toISOString().slice(0, 10);
-
-        if (KEYWORDS == null || KEYWORDS.trim() == '') {
+        if (
+            (KEYWORDS == null || KEYWORDS.trim() == '') 
+            && (LOCATION == null || LOCATION.trim() == '')
+        ) {
             this.dispatchEvent(
                 new ShowToastEvent({
-                    title: 'Keywords Cannot Be Blank', 
-                    message: 'Enter keywords before searching for jobs', 
+                    title: 'Keywords and Location cannot both be blank', 
+                    message: 'Enter keywords or location before searching for jobs', 
                     variant: 'error'
                 })
             );
@@ -91,32 +85,24 @@ export default class JobSearch extends LightningElement {
 
         try {
             await makePOSTCallout({
-                keywords: KEYWORDS.trim(), 
-                location: this.location == null ? null : this.location.trim(), 
-                radius: this.radius == null ? 25 : this.radius, 
-                salary: this.salary == null ? 50000 : this.salary, 
-                datecreatedfrom: this.datecreatedfrom == null ? LAST_MONTH : this.datecreatedfrom, 
-                page: this.page == null ? 1 : this.page, 
-                resultonpage: this.resultonpage == null ? 20 : this.resultonpage
+                keywords: KEYWORDS == null ? null : KEYWORDS.trim(), 
+                location: LOCATION == null ? null : LOCATION.trim(), 
+                radius: this.kilometers, 
+                salary: this.salary || 0, 
+                datecreatedfrom: this.datecreatedfrom || LAST_WEEK, 
+                page: this.page || 1, 
+                resultonpage: 100
             });
 
             this.dispatchEvent(
                 new ShowToastEvent({
                     title: 'Success', 
-                    message: 'Jobs retrieved', 
+                    message: 'If you see no results, change your job search filters and try again', 
                     variant: 'success'
                 })
             );
         } catch (e) {
-            console.log('JSON.stringify(e) = ' + JSON.stringify(e));
-
-            this.dispatchEvent(
-                new ShowToastEvent({
-                    title: 'Error while searching and retrieving records', 
-                    message: e.body.message, 
-                    variant: 'error'
-                })
-            );
+            this.handleErrorWhileSearchingForJobs(e);
         }
 
         try {
@@ -126,8 +112,19 @@ export default class JobSearch extends LightningElement {
         }
     }
 
+    handleErrorWhileSearchingForJobs(e) {
+        console.log('JSON.stringify(e) = ' + JSON.stringify(e));
+
+        this.dispatchEvent(
+            new ShowToastEvent({
+                title: 'Error while searching for jobs', 
+                message: e.body.message, 
+                variant: 'error'
+            })
+        );
+    }
+
     handleErrorWhileRefreshingRecord(e) {
-        // console.log('handleErrorWhileRefreshingRecord');
         console.log('JSON.stringify(e) = ' + JSON.stringify(e));
 
         this.dispatchEvent(
