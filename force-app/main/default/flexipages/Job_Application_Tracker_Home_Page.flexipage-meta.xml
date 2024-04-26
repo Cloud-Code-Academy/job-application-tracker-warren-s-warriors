@@ -17,12 +17,6 @@
                 <identifier>home_eventContainer</identifier>
             </componentInstance>
         </itemInstances>
-        <itemInstances>
-            <componentInstance>
-                <componentName>home:recentRecordContainer</componentName>
-                <identifier>home_recentRecordContainer</identifier>
-            </componentInstance>
-        </itemInstances>
         <name>bottomLeft</name>
         <type>Region</type>
     </flexiPageRegions>
@@ -45,8 +39,8 @@
         </itemInstances>
         <itemInstances>
             <componentInstance>
-                <componentName>home:assistant</componentName>
-                <identifier>home_assistant</identifier>
+                <componentName>home:recentRecordContainer</componentName>
+                <identifier>home_recentRecordContainer</identifier>
             </componentInstance>
         </itemInstances>
         <name>sidebar</name>
