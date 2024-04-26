@@ -11,8 +11,8 @@ req.setMethod('POST');
 Map<String, Object> reqBodyMap = new Map<String, Object>{
     'keywords' => 'Junior Salesforce Developer', 
     'location' => 'New York', 
-    'radius' => '30', 
-    'salary' => 70000, 
+    'radius' => '25', 
+    'salary' => 50000, 
     'datecreatedfrom' => '2024-04-15', 
     'page' => '1', 
     'resultonpage' => '50'
@@ -24,7 +24,8 @@ Http http = new Http();
 
 HttpResponse res = http.send(req);
 
-String resBody = res.getBody().replaceAll('\n', '').replaceAll('\r', '').replaceAll('<b>', '').replaceAll('</b>', '').replaceAll('&nbsp;', '');
+String resBody = res.getBody().stripHtmlTags();
+// String resBody = res.getBody().replaceAll('\n', '').replaceAll('\r', '').replaceAll('<b>', '').replaceAll('</b>', '').replaceAll('&nbsp;', '');
 
 System.debug('resBody = ' + resBody);
 
@@ -44,9 +45,14 @@ if (res.getStatusCode() == 200) {
         String location = String.valueOf(jobFieldMap.get('location'));
         String snippet = String.valueOf(jobFieldMap.get('snippet'));
         String salary = String.valueOf(jobFieldMap.get('salary'));
+        String source = String.valueOf(jobFieldMap.get('source'));
+        String jobType = String.valueOf(jobFieldMap.get('type'));
         String link = String.valueOf(jobFieldMap.get('link'));
         String company = String.valueOf(jobFieldMap.get('company'));
-        String id = String.valueOf(jobFieldMap.get('id'));
+        String updated = String.valueOf(jobFieldMap.get('updated'));
+        String jobId = String.valueOf(jobFieldMap.get('id'));
+
+        Datetime updatedDT = Datetime.valueof(updated.substringBefore('.').replace('T', ' '));
 
         System.debug('----------BEGIN LOOP ' + loopCount + ' ----------');
 
@@ -54,9 +60,12 @@ if (res.getStatusCode() == 200) {
         System.debug('location = ' + location);
         System.debug('snippet = ' + snippet);
         System.debug('salary = ' + salary);
+        System.debug('source = ' + source);
+        System.debug('type = ' + jobType);
         System.debug('link = ' + link);
         System.debug('company = ' + company);
-        System.debug('id = ' + id);
+        System.debug('updatedDT = ' + updatedDT);
+        System.debug('jobId = ' + jobId);
 
         System.debug('----------END LOOP ' + loopCount + ' ----------');
     }
