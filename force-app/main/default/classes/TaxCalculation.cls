@@ -28,16 +28,22 @@ public with sharing class TaxCalculation {
 
     @AuraEnabled(cacheable=true)
     public static Decimal calculateSocialSecurityTax(Decimal salary) {
-        Decimal socialSecurityTax = (salary * 0.062);
-
-        return socialSecurityTax.setScale(2, System.RoundingMode.HALF_UP);
+        Decimal socialSecurityTax = 0.00;
+        if (salary > 0){
+            socialSecurityTax = (salary * 0.062);
+            socialSecurityTax.setScale(2, System.RoundingMode.HALF_UP);
+        }
+        return socialSecurityTax;
     }
 
     @AuraEnabled(cacheable=true)
     public static Decimal calculateMedicareTax(Decimal salary) {
-        Decimal socialSecurityTax = (salary * 0.0145);
-
-        return socialSecurityTax.setScale(2, System.RoundingMode.HALF_UP);
+        Decimal medicareTaxes = 0.00;
+        if (salary > 0){
+            medicareTaxes = (salary * 0.0145);
+            medicareTaxes.setScale(2, System.RoundingMode.HALF_UP);
+        }
+        return medicareTaxes;
     }
 
     public static void calculatePayrollTaxes(List<Job_Application__c> triggerDotNew) {
