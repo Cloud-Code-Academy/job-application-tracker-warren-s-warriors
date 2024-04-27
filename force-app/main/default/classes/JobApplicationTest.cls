@@ -55,7 +55,7 @@ private with sharing class JobApplicationTest {
             Position_Title__c = 'Junior Salesforce Developer', 
             Work_Model__c = 'Onsite', 
             Location__c = 'San Francisco, CA', 
-            Job_Type__c = 'Contract', 
+            Job_Type__c = 'Temporary', 
             Salary__c = 50000, 
             URL__c = 'https://careers.salesforce.com', 
             Job_Description__c = 'Description', 

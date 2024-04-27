@@ -618,7 +618,7 @@ public with sharing class TestDataFactory {
             Notes__c = 'Notes', 
             Position_Title__c = position_title, 
             Work_Model__c = 'Remote', 
-            Job_Type__c = 'Contract', 
+            Job_Type__c = 'Temporary', 
             Salary__c = 50000, 
             URL__c = 'https://trailhead.salesforce.com/en/career-path', 
             Job_Description__c = 'Description', 
