@@ -17,15 +17,15 @@ export default class JobSearch extends LightningElement {
     @wire(queryJobs) jobs;
 
     get lastWeek() {
-        const TODAY = new Date();
+        const TODAY_TO_LAST_WEEK = new Date();
 
-        TODAY.setDate(TODAY.getDate() - 7);
+        TODAY_TO_LAST_WEEK.setDate(TODAY_TO_LAST_WEEK.getDate() - 7);
 
         const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-        const YEAR = TODAY.getFullYear();
-        const MONTH = MONTHS[TODAY.getMonth()];
-        const DAY = TODAY.getDate();
+        const YEAR = TODAY_TO_LAST_WEEK.getFullYear();
+        const MONTH = MONTHS[TODAY_TO_LAST_WEEK.getMonth()];
+        const DAY = TODAY_TO_LAST_WEEK.getDate();
 
         return `${MONTH} ${DAY}, ${YEAR}`;
     }
@@ -66,7 +66,20 @@ export default class JobSearch extends LightningElement {
 
         const KEYWORDS = this.keywords;
         const LOCATION = this.location;
-        const LAST_WEEK = new Date(this.lastWeek).toISOString().slice(0, 10);
+
+        let dateOfPosting;
+
+        if (this.datecreatedfrom == null) {
+            dateOfPosting = new Date(this.lastWeek);
+        } else {
+            dateOfPosting = new Date(this.datecreatedfrom);
+
+            const YEAR = dateOfPosting.getFullYear();
+            const MONTH = dateOfPosting.getMonth() + 1;
+            const DAY = dateOfPosting.getDate() + 1;
+
+            dateOfPosting = new Date(`${MONTH} ${DAY}, ${YEAR}`);
+        }
 
         if (
             (KEYWORDS == null || KEYWORDS.trim() == '') 
@@ -83,13 +96,25 @@ export default class JobSearch extends LightningElement {
             return;
         }
 
+        if (dateOfPosting > new Date()) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Date cannot be after today', 
+                    message: 'Select today\'s date or an earlier date', 
+                    variant: 'error'
+                })
+            );
+
+            return;
+        }
+
         try {
             await makePOSTCallout({
                 keywords: KEYWORDS == null ? null : KEYWORDS.trim(), 
                 location: LOCATION == null ? null : LOCATION.trim(), 
                 radius: this.kilometers, 
                 salary: this.salary || 0, 
-                datecreatedfrom: this.datecreatedfrom || LAST_WEEK, 
+                datecreatedfrom: dateOfPosting, 
                 page: this.page || 1, 
                 resultonpage: 100
             });
