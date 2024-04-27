@@ -1,16 +1,16 @@
 <template>
-    <lightning-card>
+    <lightning-card 
+        title="Take Home Salary Calculator" 
+        icon-name="custom:custom17"
+    >
         <div class="slds-var-m-top_medium">
-            <lightning-card>
                 <div class="slds-var-p-around_medium">
                     <form>
                         <lightning-input 
                             type="number" 
                             label="Enter Salary to calculate take home pay:" 
-                            
                             value={salary} 
                             onchange={handleSalaryChange}></lightning-input>
-                            <!-- slds-var-p-around_medium  -->
                                 <div class="slds-var-m-right_large slds-var-m-top_medium"> 
                                     <lightning-button     
                                         variant="brand-outline" 
@@ -32,7 +32,6 @@
                                 </div>
                     </form>
                 </div>
-            </lightning-card>
             <!-- Display tax information and takeHomePay when submit button is clicked -->
             <template if:true={isSubmitted}>
                 <table class="slds-table slds-table_cell-buffer slds-table_bordered slds-table_striped" aria-label="Example table of Opportunities with striped rows">
@@ -61,9 +60,9 @@
                                 data-label="Salary and Taxes" 
                                 scope="row">
                                     <div 
-                                        class="slds-truncate" 
+                                        class="slds-truncate slds-text-title_bold" 
                                         title="Salary">
-                                            <a href="#" tabindex="-1">Salary</a>
+                                        Salary
                                     </div>
                             </th>
                             <td data-label="Values">
@@ -81,9 +80,9 @@
                                 data-label="Salary and Taxes" 
                                 scope="row">
                                     <div 
-                                        class="slds-truncate" 
+                                        class="slds-truncate slds-text-title_bold" 
                                         title="Federal Taxes">
-                                            <a href="#" tabindex="-1">Federal Taxes</a>
+                                        Federal Taxes
                                     </div>
                             </th>
                             <td data-label="Values">
@@ -101,15 +100,17 @@
                                 data-label="Salary and Taxes" 
                                 scope="row">
                                     <div 
-                                        class="slds-truncate" 
+                                        class="slds-truncate slds-text-title_bold" 
                                         title="Social Security Taxes">
-                                            <a href="#" tabindex="-1">Social Security Taxes</a>
+                                        Social Security Taxes
                                     </div>
                             </th>
                             <td data-label="Values">
                                 <div 
                                     class="slds-truncate" 
-                                    title="Social Security Taxes"><lightning-formatted-number value={ssTax} format-style="currency" 
+                                    title="Social Security Taxes"><lightning-formatted-number 
+                                    value={ssTax} 
+                                    format-style="currency" 
                                     currency-code="USD"></lightning-formatted-number>
                                 </div>
                             </td>
@@ -117,9 +118,9 @@
                         <tr class="slds-hint-parent">
                             <th data-label="Salary and Taxes" 
                                 scope="row">
-                                    <div class="slds-truncate" 
+                                    <div class="slds-truncate slds-text-title_bold" 
                                          title="Medicare Taxes">
-                                            <a href="#" tabindex="-1">Medicare Taxes</a>
+                                         Medicare Taxes
                                     </div>
                             </th>
                             <td data-label="Values">
@@ -136,13 +137,13 @@
                         <tr class="slds-hint-parent">
                             <th data-label="Salary and Taxes" 
                                 scope="row">
-                                    <div class="slds-truncate" 
+                                    <div class="slds-truncate slds-text-title_bold" 
                                          title="Take Home Pay (Monthly)">
-                                        <a href="#" tabindex="-1">Take Home Pay (Monthly)</a>
+                                         Take Home Pay (Monthly)
                                     </div>
                             </th>
                             <td data-label="Values">
-                                <div class="slds-truncate" 
+                                <div class="slds-truncate " 
                                      title="Take Home Pay (Monthly)">
                                      <lightning-formatted-number 
                                         value={takeHomePayMonthly} 
@@ -154,8 +155,9 @@
                         </tr>
                         <tr class="slds-hint-parent">
                             <th data-label="Salary and Taxes" scope="row">
-                                <div class="slds-truncate" title="Take Home Pay (Monthly)">
-                                    <a href="#" tabindex="-1">Take Home Pay (Monthly)</a>
+                                <div class="slds-truncate slds-text-title_bold" 
+                                     title="Take Home Pay (Yearly)">
+                                     Take Home Pay (Yearly)
                                 </div>
                             </th>
                             <td data-label="Values">
