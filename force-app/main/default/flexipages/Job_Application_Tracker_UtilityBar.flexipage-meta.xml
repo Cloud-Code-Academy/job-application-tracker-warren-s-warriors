@@ -21,7 +21,7 @@
                 <componentInstanceProperties>
                     <name>label</name>
                     <type>decorator</type>
-                    <value>Take Home Salary</value>
+                    <value>Take Home Salary Calculator</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>scrollable</name>
