@@ -16,7 +16,7 @@
                 <componentInstanceProperties>
                     <name>icon</name>
                     <type>decorator</type>
-                    <value>fallback</value>
+                    <value>moneybag</value>
                 </componentInstanceProperties>
                 <componentInstanceProperties>
                     <name>label</name>
