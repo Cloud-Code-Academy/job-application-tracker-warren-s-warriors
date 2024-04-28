@@ -239,6 +239,18 @@ export default class JobSearchResult extends LightningElement {
     async handleUpsertJobApplicationAndDeleteJobAndRefreshRecord(event) {
         event.preventDefault();
 
+        if (this.recordIds == null || this.recordIds == '' || this.recordIds == []) {
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'No job selected', 
+                    message: 'Select at least one job to save as job application', 
+                    variant: 'error'
+                })
+            );
+
+            return;
+        }
+
         try {
             await upsertJobApplications({ recordIds: this.recordIds });
 
