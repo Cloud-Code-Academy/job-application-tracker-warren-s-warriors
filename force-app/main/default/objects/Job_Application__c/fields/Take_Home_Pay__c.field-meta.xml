@@ -3,9 +3,11 @@
     <fullName>Take_Home_Pay__c</fullName>
     <description>Estimate of take-home pay</description>
     <externalId>false</externalId>
-    <formula>IF(Salary__c &gt; 0, 
-Salary__c - Federal_Income_Tax__c - Social_Security_Tax__c - Medicare_Withholding__c,
-0.00)</formula>
+    <formula>IF(
+    Salary__c &gt; 0, 
+    Salary__c - Federal_Income_Tax__c - Social_Security_Tax__c - Medicare_Withholding__c, 
+    0.00
+)</formula>
     <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
     <label>Take-Home Pay</label>
     <precision>18</precision>
