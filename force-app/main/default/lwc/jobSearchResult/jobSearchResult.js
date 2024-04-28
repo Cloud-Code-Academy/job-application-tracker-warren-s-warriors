@@ -14,8 +14,7 @@ import upsertJobApplications from '@salesforce/apex/JobApplicationController.ups
 import deleteJobs from '@salesforce/apex/JobController.deleteJobs';
 
 const ACTIONS = [
-    { label: 'Save As Job Application', name: 'save' },
-    { label: 'Delete', name: 'delete' }
+    { label: 'Save As Job Application', name: 'save' }
 ];
 
 const COLS = [
@@ -153,18 +152,8 @@ export default class JobSearchResult extends LightningElement {
                 }
 
                 break;
-            case 'delete':
-                try {
-                    await deleteJobs({ recordIds: ROW.Id });
-                } catch (e) {
-                    this.handleErrorWhileDeletingRecord(e);
-                }
-
-                try {
-                    await refreshApex(this.jobs);
-                } catch (e) {
-                    this.handleErrorWhileRefreshingRecord(e);
-                }
+            default:
+                console.log('switch default');
 
                 break;
         }
