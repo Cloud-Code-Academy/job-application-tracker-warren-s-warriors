@@ -16,7 +16,7 @@
                                         variant="brand-outline" 
                                         icon-position="left"
                                         label="Submit" 
-                                        onclick={handleSubmission}>
+                                        onclick={calculateTaxes}>
                                     </lightning-button>
                                     <span class="slds-var-m-left_large">
                                         <lightning-button
@@ -138,6 +138,64 @@
                             <th data-label="Salary and Taxes" 
                                 scope="row">
                                     <div class="slds-truncate slds-text-title_bold" 
+                                         title="Space">
+                                         
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate" 
+                                     title="Space">
+                                     <lightning-formatted-number 
+                                        format-style="currency" 
+                                        currency-code="USD">
+                                    </lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                    <thead>
+                        <tr class="slds-line-height_reset">
+                            <th class="" 
+                                scope="col">
+                                    <div 
+                                        class="slds-truncate" 
+                                        title="Take Home Pay Variants">Take Home Pay Variants
+                                    </div>
+                            </th>
+                            <th 
+                                class="" 
+                                scope="col">
+                                 <div 
+                                    class="slds-truncate" 
+                                    title="Values">Values
+                                </div>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="slds-hint-parent">
+                            <th data-label="Take Home Pay Variants" 
+                                scope="row">
+                                    <div class="slds-truncate slds-text-title_bold" 
+                                         title="Take Home Pay (BiWeekly)">
+                                         Take Home Pay (BiWeekly)
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate " 
+                                     title="Take Home Pay (BiWeekly)">
+                                     <lightning-formatted-number 
+                                        value={takeHomePayBiWeekly} 
+                                        format-style="currency" 
+                                        currency-code="USD">
+                                    </lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr class="slds-hint-parent">
+                            <th data-label="Take Home Pay Variants" 
+                                scope="row">
+                                    <div class="slds-truncate slds-text-title_bold" 
                                          title="Take Home Pay (Monthly)">
                                          Take Home Pay (Monthly)
                                     </div>
@@ -152,9 +210,28 @@
                                     </lightning-formatted-number>
                                 </div>
                             </td>
-                        </tr>
+                        </tr> 
                         <tr class="slds-hint-parent">
-                            <th data-label="Salary and Taxes" scope="row">
+                            <th data-label="Take Home Pay Variants" 
+                                scope="row">
+                                    <div class="slds-truncate slds-text-title_bold" 
+                                         title="Take Home Pay (Six Months)">
+                                         Take Home Pay (Six Months)
+                                    </div>
+                            </th>
+                            <td data-label="Values">
+                                <div class="slds-truncate " 
+                                     title="Take Home Pay (Six Months)">
+                                     <lightning-formatted-number 
+                                        value={takeHomePaySixMonths} 
+                                        format-style="currency" 
+                                        currency-code="USD">
+                                    </lightning-formatted-number>
+                                </div>
+                            </td>
+                        </tr> 
+                        <tr class="slds-hint-parent">
+                            <th data-label="Take Home Pay Variants" scope="row">
                                 <div class="slds-truncate slds-text-title_bold" 
                                      title="Take Home Pay (Yearly)">
                                      Take Home Pay (Yearly)

@@ -7,8 +7,10 @@ export default class CalculateTakeHome extends LightningElement {
     @track fedTax;
     @track ssTax = 0.00;
     @track medicareTax = 0.00;
-    @track takeHomePayYearly= 0.00; 
+    @track takeHomePayYearly = 0.00; 
+    @track takeHomePaySixMonths = 0.00;
     @track takeHomePayMonthly = 0.00;
+    @track takeHomePayBiWeekly = 0.00;
     @track isSubmitted = false;
 
 
@@ -38,10 +40,22 @@ export default class CalculateTakeHome extends LightningElement {
                 this.medicareTax = results[2];
 
                 // Calculate takeHomePayYearly
-                this.takeHomePayYearly = this.salary - this.fedTax - this.medicareTax - this.ssTax;
-                //Calculate Monthly TakeHome Pay
-                this.takeHomePayMonthly = this.takeHomePayYearly / 12;
-
+                if(this.salary >= 0){
+                    this.takeHomePayYearly = this.salary - this.fedTax -
+                                             this.medicareTax - this.ssTax;
+                }
+                //Calculate Monthly TakeHome Pay every 6 months
+                if(this.salary >= 0){
+                    this.takeHomePaySixMonths = this.takeHomePayYearly / 2;
+                }
+                //Calculate Monthly TakeHome Pay Monthly
+                if(this.salary >= 0){
+                    this.takeHomePayMonthly = this.takeHomePayYearly / 12;
+                }
+                //Calculate Monthly TakeHome Pay bi-weekly
+                if(this.salary >= 0){
+                    this.takeHomePayBiWeekly = this.takeHomePayYearly / 26;
+                }
                 // Show tax information
                 this.isSubmitted = true;
             })
@@ -55,16 +69,14 @@ export default class CalculateTakeHome extends LightningElement {
         }
     }
 
-    handleSubmission() {
-        this.calculateTaxes();
-    }
-
     resetHandler(){
         this.fedTax = 0.00;
         this.ssTax = 0.00;
         this.medicareTax = 0.00;
         this.takeHomePayYearly = 0.00;
+        this.takeHomePaySixMonths = 0.00;
         this.takeHomePayMonthly = 0.00;
+        this.takeHomePayBiWeekly = 0.00;
         this.isSubmitted = false;
         this.salary ='';
     }
