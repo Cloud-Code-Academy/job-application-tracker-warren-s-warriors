@@ -344,8 +344,8 @@
                     <name>uiBehavior</name>
                     <value>readonly</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Medicare_Withholding__c</fieldItem>
-                <identifier>RecordMedicare_Withholding_cField</identifier>
+                <fieldItem>Record.Social_Security_Tax__c</fieldItem>
+                <identifier>RecordSocial_Security_Tax_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
@@ -354,8 +354,8 @@
                     <name>uiBehavior</name>
                     <value>readonly</value>
                 </fieldInstanceProperties>
-                <fieldItem>Record.Social_Security_Tax__c</fieldItem>
-                <identifier>RecordSocial_Security_Tax_cField</identifier>
+                <fieldItem>Record.Medicare_Withholding__c</fieldItem>
+                <identifier>RecordMedicare_Withholding_cField</identifier>
             </fieldInstance>
         </itemInstances>
         <itemInstances>
