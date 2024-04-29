@@ -22,4 +22,9 @@ public with sharing class JobController {
     public static void deleteJobs(List<String> recordIds) {
         delete [SELECT Id FROM Job__c WHERE Id IN :recordIds];
     }
+
+    @AuraEnabled
+    public static void deleteAllJobs() {
+        delete [SELECT Id FROM Job__c];
+    }
 }

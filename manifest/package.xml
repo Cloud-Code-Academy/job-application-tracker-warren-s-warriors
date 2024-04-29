@@ -21,6 +21,7 @@
         <members>JobControllerTest</members>
         <members>JoobleJSONCallout</members>
         <members>JoobleJSONCalloutMockGenerator</members>
+        <members>JoobleJSONCalloutMockGeneratorFailure</members>
         <members>JoobleJSONCalloutTest</members>
         <members>TaxCalculation</members>
         <members>TaxCalculationTest</members>
@@ -265,10 +266,6 @@
     <types>
         <members>Images</members>
         <name>StaticResource</name>
-    </types>
-    <types>
-        <members>Account.Billing</members>
-        <name>WebLink</name>
     </types>
     <version>60.0</version>
 </Package>

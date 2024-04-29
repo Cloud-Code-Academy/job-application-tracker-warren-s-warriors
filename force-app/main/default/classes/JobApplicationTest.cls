@@ -39,7 +39,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void validateApplicationDateIsBeforeFollowUpDate() {
+    private static void application_date_cannot_be_after_follow_up_date() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -74,9 +74,11 @@ private with sharing class JobApplicationTest {
         try {
             update jobApplicationSalesforce;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -85,12 +87,72 @@ private with sharing class JobApplicationTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
+    }
 
-        Test.stopTest();
+    private static Map<String, Id> getAccIdMap() {
+        List<Account> retrievedAccts = [
+            SELECT 
+                Id, 
+                Name 
+            FROM Account 
+            WHERE Name IN (
+                    'Blackthorn', 
+                    'Hudson Technology Systems', 
+                    'Booz Allen Hamilton', 
+                    'Salesforce'
+                )
+        ];
+
+        Map<String, Id> accIdMap = new Map<String, Id>();
+
+        for (Account retrievedAcct : retrievedAccts) {
+            if (retrievedAcct.Name == 'Blackthorn') {
+                accIdMap.put('Blackthorn', retrievedAcct.Id);
+            } else if (retrievedAcct.Name == 'Hudson Technology Systems') {
+                accIdMap.put('HTS', retrievedAcct.Id);
+            } else if (retrievedAcct.Name == 'Booz Allen Hamilton') {
+                accIdMap.put('BAH', retrievedAcct.Id);
+            } else if (retrievedAcct.Name == 'Salesforce') {
+                accIdMap.put('Salesforce', retrievedAcct.Id);
+            }
+        }
+
+        return accIdMap;
+    }
+
+    private static Map<String, Id> getContactIdMap() {
+        List<Contact> retrievedContacts = [
+            SELECT 
+                Id, 
+                LastName 
+            FROM Contact 
+            WHERE LastName IN (
+                    'Thornie', 
+                    'Hudson', 
+                    'Booz', 
+                    'Bear'
+                )
+        ];
+
+        Map<String, Id> contactIdMap = new Map<String, Id>();
+
+        for (Contact retrievedContact : retrievedContacts) {
+            if (retrievedContact.LastName == 'Thornie') {
+                contactIdMap.put('Thornie', retrievedContact.Id);
+            } else if (retrievedContact.LastName == 'Hudson') {
+                contactIdMap.put('Hudson', retrievedContact.Id);
+            } else if (retrievedContact.LastName == 'Booz') {
+                contactIdMap.put('Booz', retrievedContact.Id);
+            } else if (retrievedContact.LastName == 'Bear') {
+                contactIdMap.put('Bear', retrievedContact.Id);
+            }
+        }
+
+        return contactIdMap;
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsSaved_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Saved() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -170,7 +232,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsApplying_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Applying() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -250,7 +312,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsApplied_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Applied() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -330,7 +392,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsInterviewing_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Interviewing() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -410,7 +472,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsNegotiating_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Negotiating() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -490,7 +552,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsAccepted_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Accepted() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -570,7 +632,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void createTaskWhenStatusIsClosed_ExpectTwoTasksCreated() {
+    private static void creates_two_tasks_if_job_application_status_is_Closed() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -650,7 +712,7 @@ private with sharing class JobApplicationTest {
     }
 
     @IsTest
-    private static void setPrimaryContact() {
+    private static void updates_job_applications_primary_contact() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -823,67 +885,5 @@ private with sharing class JobApplicationTest {
         System.assertEquals(6, retrievedJobApplicationsAfterUpdate_Hudson.size(), 'Expect 6 job applications with Hudson as primary contact');
         System.assertEquals(0, retrievedJobApplicationsAfterUpdate_Booz.size(), 'Expect 0 job application with Booz as primary contact');
         System.assertEquals(0, retrievedJobApplicationsAfterUpdate_Bear.size(), 'Expect 0 job application with Bear as primary contact');
-    }
-
-    private static Map<String, Id> getAccIdMap() {
-        List<Account> retrievedAccts = [
-            SELECT 
-                Id, 
-                Name 
-            FROM Account 
-            WHERE Name IN (
-                    'Blackthorn', 
-                    'Hudson Technology Systems', 
-                    'Booz Allen Hamilton', 
-                    'Salesforce'
-                )
-        ];
-
-        Map<String, Id> accIdMap = new Map<String, Id>();
-
-        for (Account retrievedAcct : retrievedAccts) {
-            if (retrievedAcct.Name == 'Blackthorn') {
-                accIdMap.put('Blackthorn', retrievedAcct.Id);
-            } else if (retrievedAcct.Name == 'Hudson Technology Systems') {
-                accIdMap.put('HTS', retrievedAcct.Id);
-            } else if (retrievedAcct.Name == 'Booz Allen Hamilton') {
-                accIdMap.put('BAH', retrievedAcct.Id);
-            } else if (retrievedAcct.Name == 'Salesforce') {
-                accIdMap.put('Salesforce', retrievedAcct.Id);
-            }
-        }
-
-        return accIdMap;
-    }
-
-    private static Map<String, Id> getContactIdMap() {
-        List<Contact> retrievedContacts = [
-            SELECT 
-                Id, 
-                LastName 
-            FROM Contact 
-            WHERE LastName IN (
-                    'Thornie', 
-                    'Hudson', 
-                    'Booz', 
-                    'Bear'
-                )
-        ];
-
-        Map<String, Id> contactIdMap = new Map<String, Id>();
-
-        for (Contact retrievedContact : retrievedContacts) {
-            if (retrievedContact.LastName == 'Thornie') {
-                contactIdMap.put('Thornie', retrievedContact.Id);
-            } else if (retrievedContact.LastName == 'Hudson') {
-                contactIdMap.put('Hudson', retrievedContact.Id);
-            } else if (retrievedContact.LastName == 'Booz') {
-                contactIdMap.put('Booz', retrievedContact.Id);
-            } else if (retrievedContact.LastName == 'Bear') {
-                contactIdMap.put('Bear', retrievedContact.Id);
-            }
-        }
-
-        return contactIdMap;
     }
 }

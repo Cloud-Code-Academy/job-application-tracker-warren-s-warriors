@@ -1,7 +1,7 @@
 @IsTest
 private with sharing class JoobleJSONCalloutTest {
     @IsTest
-    private static void makePOSTCallout_ExpectThreeRetrievedJobs() {
+    private static void make_POST_callout_creates_three_jobs() {
         // GIVEN
         Test.setMock(HttpCalloutMock.class, new JoobleJSONCalloutMockGenerator());
 
@@ -22,15 +22,7 @@ private with sharing class JoobleJSONCalloutTest {
 
         // THEN
         List<Job__c> retrievedJobs = [
-            SELECT 
-                Title__c, 
-                Location__c, 
-                Salary__c, 
-                Source__c, 
-                Type__c, 
-                Link__c, 
-                Company__c, 
-                Id__c 
+            SELECT Id 
             FROM Job__c 
             WHERE Title__c LIKE '%Salesforce Developer%' 
                 AND Location__c LIKE '%FL%' 
@@ -61,5 +53,46 @@ private with sharing class JoobleJSONCalloutTest {
         ];
 
         System.assertEquals(3, retrievedJobs.size(), 'Expect 3 retrieved jobs');
+    }
+
+    @IsTest
+    private static void make_POST_callout_fails() {
+        // GIVEN
+        Test.setMock(HttpCalloutMock.class, new JoobleJSONCalloutMockGeneratorFailure());
+
+        // WHEN
+        Test.startTest();
+
+        try {
+            JoobleJSONCallout.makePOSTCallout(
+                null, 
+                null, 
+                null, 
+                null, 
+                null, 
+                null, 
+                null
+            );
+
+            Test.stopTest();
+
+            // THEN
+            Assert.fail('Expect exception');
+        } catch (Exception e) {
+            System.debug('Exception message = ' + e.getMessage());
+
+            System.assertEquals(
+                'HTTP request failed | Status Code: 500', 
+                e.getMessage(), 
+                'Exception message does not match: ' + e.getMessage()
+            );
+        }
+
+        List<Job__c> retrievedJobs = [
+            SELECT Id 
+            FROM Job__c
+        ];
+
+        System.assertEquals(0, retrievedJobs.size(), 'Expect 0 retrieved job');
     }
 }

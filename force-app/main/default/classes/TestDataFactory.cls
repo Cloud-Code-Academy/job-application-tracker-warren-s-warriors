@@ -59,6 +59,29 @@ public with sharing class TestDataFactory {
         return jobApplications;
     }
 
+    private Job_Application__c createJobApplication(
+        String status, 
+        String position_title, 
+        Id accId, 
+        Id contactId
+    ) {
+        Job_Application__c jobApplication = new Job_Application__c(
+            Status__c = status, 
+            Rating__c = '3 Star', 
+            Notes__c = 'Notes', 
+            Position_Title__c = position_title, 
+            Work_Model__c = 'Remote', 
+            Job_Type__c = 'Temporary', 
+            Salary__c = 50000, 
+            URL__c = 'https://trailhead.salesforce.com/en/career-path', 
+            Job_Description__c = 'Description', 
+            Company__c = accId, 
+            Primary_Contact__c = contactId
+        );
+
+        return jobApplication;
+    }
+
     @TestVisible
     private List<Job_Application__c> createJobApplications_createTaskWhenStatusIsSaved(
         Id accBAHId, 
@@ -604,28 +627,5 @@ public with sharing class TestDataFactory {
         return jobApplicationContacts;
 
         // 8 job application contacts
-    }
-
-    private Job_Application__c createJobApplication(
-        String status, 
-        String position_title, 
-        Id accId, 
-        Id contactId
-    ) {
-        Job_Application__c jobApplication = new Job_Application__c(
-            Status__c = status, 
-            Rating__c = '3 Star', 
-            Notes__c = 'Notes', 
-            Position_Title__c = position_title, 
-            Work_Model__c = 'Remote', 
-            Job_Type__c = 'Temporary', 
-            Salary__c = 50000, 
-            URL__c = 'https://trailhead.salesforce.com/en/career-path', 
-            Job_Description__c = 'Description', 
-            Company__c = accId, 
-            Primary_Contact__c = contactId
-        );
-
-        return jobApplication;
     }
 }

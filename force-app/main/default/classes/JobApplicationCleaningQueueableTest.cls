@@ -52,7 +52,7 @@ private class JobApplicationCleaningQueueableTest {
     }
 
     @IsTest
-    private static void cleanStaleJobApplication_Enqueue_ExpectTwoStaleJobApplicationsWithClosedStatus() {
+    private static void updates_two_job_applications_status_to_Closed() {
         // GIVEN
 
         // WHEN
@@ -93,7 +93,7 @@ private class JobApplicationCleaningQueueableTest {
                 AND Follow_Up_Date__c <= N_DAYS_AGO:30
         ];
 
-        System.assertEquals(2, retrievedJobApplications.size(), 'Expect 2 stale job applications with closed status');
+        System.assertEquals(2, retrievedJobApplications.size(), 'Expect 2 stale job applications with Closed status');
 
         AsyncApexJob jobInfo_THEN = [
             SELECT 

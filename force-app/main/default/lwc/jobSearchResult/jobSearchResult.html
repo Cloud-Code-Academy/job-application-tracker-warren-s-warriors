@@ -12,6 +12,16 @@
         >
         </lightning-button>
 
+        <lightning-button 
+            label="Clear All Results" 
+            slot="actions" 
+            type="button" 
+            variant="brand-outline" 
+            onclick={handleClearAllResultsAndRefreshRecord} 
+            class="slds-var-m-left_medium"
+        >
+        </lightning-button>
+
         <div class="slds-var-p-horizontal_small">
             <template lwc:if={jobs.data}>
                 <section class="datatable">

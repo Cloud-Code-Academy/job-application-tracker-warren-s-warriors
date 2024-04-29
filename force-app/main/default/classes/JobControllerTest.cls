@@ -50,7 +50,7 @@ private with sharing class JobControllerTest {
     }
 
     @IsTest
-    private static void queryJobs_ExpectThreeRetrievedJobs() {
+    private static void retrieves_three_jobs() {
         // GIVEN
 
         // WHEN
@@ -65,7 +65,7 @@ private with sharing class JobControllerTest {
     }
 
     @IsTest
-    private static void deleteJobs_ExpectZeroJobsAfterDeletion() {
+    private static void deletes_jobs() {
         // GIVEN
 
         // WHEN
@@ -80,6 +80,34 @@ private with sharing class JobControllerTest {
         }
 
         JobController.deleteJobs(recordIds);
+
+        Test.stopTest();
+
+        // THEN
+        List<Job__c> retrievedJobs = [
+            SELECT Id 
+            FROM Job__c
+        ];
+
+        System.assertEquals(0, retrievedJobs.size(), 'Expect 0 jobs after deletion');
+    }
+
+    @IsTest
+    private static void deletes_all_jobs() {
+        // GIVEN
+
+        // WHEN
+        Test.startTest();
+
+        List<Job__c> jobs = JobController.queryJobs();
+
+        List<String> recordIds = new List<String>();
+
+        for (Job__c job : jobs) {
+            recordIds.add(job.Id);
+        }
+
+        JobController.deleteAllJobs();
 
         Test.stopTest();
 

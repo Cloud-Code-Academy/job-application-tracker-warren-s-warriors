@@ -39,7 +39,7 @@ private with sharing class JobApplicationContactTest {
     }
 
     @IsTest
-    private static void setPrimaryContact() {
+    private static void updates_job_applications_primary_contact() {
         // GIVEN
         Map<String, Id> accIdMap = getAccIdMap();
 
@@ -105,6 +105,8 @@ private with sharing class JobApplicationContactTest {
         Test.startTest();
 
         insert jobApplicationContacts;
+
+        Test.stopTest();
 
         // THEN
         List<Job_Application__c> retrievedJobApplicationsAfterInsertingContacts = [

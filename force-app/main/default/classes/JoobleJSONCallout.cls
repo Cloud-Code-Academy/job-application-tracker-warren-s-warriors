@@ -1,4 +1,6 @@
 public with sharing class JoobleJSONCallout {
+    public class JoobleJSONCalloutException extends Exception {}
+
     @AuraEnabled
     @future(callout=true)
     public static void makePOSTCallout(
@@ -40,6 +42,8 @@ public with sharing class JoobleJSONCallout {
 
         System.debug('resBody = ' + resBody);
 
+        System.debug('res.getStatusCode() = ' + res.getStatusCode());
+
         if (res.getStatusCode() == 200) {
             delete [SELECT Id FROM Job__c];
 
@@ -47,7 +51,9 @@ public with sharing class JoobleJSONCallout {
 
             upsert jobs Id__c;
         } else {
-            System.debug('HTTP request failed. Status Code: ' + res.getStatusCode() + ' | Response Body: ' + resBody);
+            System.debug('HTTP request failed | Status Code: ' + res.getStatusCode());
+
+            throw new JoobleJSONCalloutException('HTTP request failed | Status Code: ' + res.getStatusCode());
         }
     }
 

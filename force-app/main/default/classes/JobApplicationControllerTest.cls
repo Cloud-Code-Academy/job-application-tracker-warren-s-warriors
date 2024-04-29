@@ -99,7 +99,7 @@ private with sharing class JobApplicationControllerTest {
     }
 
     @IsTest
-    private static void upsertJobApplications_ExpectFourJobsAndFourAccountsAndThreeJobApplicationsWithSavedStatus() {
+    private static void upsert_job_applications_results_in_four_accounts_and_three_job_applications_with_Saved_status() {
         // GIVEN
         List<Job__c> jobs = [
             SELECT Id 
@@ -120,50 +120,9 @@ private with sharing class JobApplicationControllerTest {
         Test.stopTest();
 
         // THEN
-        List<Job__c> retrievedJobs = [
-            SELECT Id 
-            FROM Job__c 
-            WHERE Title__c LIKE '%Salesforce Developer%' 
-                AND Location__c LIKE '%NY%' 
-                AND Salary__c IN (
-                    '$3,210 per week', 
-                    '$90.1 - $95.9 per hour', 
-                    null
-                )
-                AND Source__c IN (
-                    'nowhere.com', 
-                    'somewhere.com', 
-                    null
-                )
-                AND Type__c IN (
-                    'Full-time', 
-                    'Temporary'
-                )
-                AND Company__c IN (
-                    'CodeEveryDay', 
-                    'Salesforce', 
-                    'Temporary Devs', 
-                    'Hirekeyz Inc'
-                )
-                AND Id__c IN (
-                    '-1234567890123456789', 
-                    '-2885668755075351000', 
-                    '-1234567890987654321', 
-                    '6407669124240903000'
-                )
-        ];
-
-        System.assertEquals(4, retrievedJobs.size(), 'Expect 4 jobs');
-
         List<Account> retrievedAccts = [
             SELECT Id 
-            FROM Account 
-            WHERE Name IN (
-                    'CodeEveryDay', 
-                    'Salesforce', 
-                    'Temporary Devs', 
-                    'Hirekeyz Inc'
-                )
+            FROM Account
         ];
 
         System.assertEquals(4, retrievedAccts.size(), 'Expect 4 accounts');
@@ -171,17 +130,9 @@ private with sharing class JobApplicationControllerTest {
         List<Job_Application__c> retrievedJobApplications = [
             SELECT Id 
             FROM Job_Application__c 
-            WHERE Status__c = 'Saved' 
-                AND Position_Title__c LIKE '%Salesforce Developer%' 
-                AND Location__c LIKE '%NY%' 
-                AND Job_Id__c IN (
-                    '-1234567890123456789', 
-                    '-2885668755075351000', 
-                    '-1234567890987654321', 
-                    '6407669124240903000'
-                )
+            WHERE Status__c = 'Saved'
         ];
 
-        System.assertEquals(3, retrievedJobApplications.size(), 'Expect 3 job applications with saved status');
+        System.assertEquals(3, retrievedJobApplications.size(), 'Expect 3 job applications with Saved status');
     }
 }

@@ -1,48 +1,57 @@
 public with sharing class EventReminder {
-    public void emailUserDayBeforeInterview() {
-        Datetime tomorrow = Datetime.now() + 1;
-        Datetime dayAftertomorrow = tomorrow + 1;
+    @TestVisible
+    private Datetime now = System.now();
 
-        Integer n;
+    public void emailReminderBeforeInterviewOnNextWeekDay() {
+        Datetime tomorrow = now + 1;
+        Datetime dayAftertomorrow = tomorrow + 1;
+        Datetime monday = dayAftertomorrow + 1;
+
+        Datetime nextWeekDayBegin;
+        Datetime nextWeekDayEnd;
 
         String day;
 
         if (tomorrow.format('E') != 'Sat' && tomorrow.format('E') != 'Sun') {
-            n = 1;
+            nextWeekDayBegin = Datetime.newInstance(tomorrow.year(), tomorrow.month(), tomorrow.day(), 00, 00, 00);
+            nextWeekDayEnd = nextWeekDayBegin + 1;
 
             day = 'tomorrow';
         } else if (
             (tomorrow.format('E') == 'Sat' || tomorrow.format('E') == 'Sun') 
             && (dayAftertomorrow.format('E') != 'Sat' && dayAftertomorrow.format('E') != 'Sun')
         ) {
-            n = 2;
+            nextWeekDayBegin = Datetime.newInstance(dayAftertomorrow.year(), dayAftertomorrow.month(), dayAftertomorrow.day(), 00, 00, 00);
+            nextWeekDayEnd = nextWeekDayBegin + 1;
 
             day = 'in 2 days';
         } else if (
             (tomorrow.format('E') == 'Sat' || tomorrow.format('E') == 'Sun') 
             && (dayAftertomorrow.format('E') == 'Sat' || dayAftertomorrow.format('E') == 'Sun')
         ) {
-            n = 3;
+            nextWeekDayBegin = Datetime.newInstance(monday.year(), monday.month(), monday.day(), 00, 00, 00);
+            nextWeekDayEnd = nextWeekDayBegin + 1;
 
             day = 'in 3 days';
         }
 
-        List<Event> events = Database.query(
-            'SELECT ' 
-                + 'Id, ' 
-                + 'Subject, ' 
-                + 'StartDateTime, ' 
-                + 'EndDateTime, ' 
-                + 'Location, ' 
-                + 'Account.Name, ' 
-                + 'Type, ' 
-                + 'Description, ' 
-                + 'WhoId, ' 
-                + 'OwnerId, ' 
-                + 'Interview_Format__c ' 
-            + 'FROM Event ' 
-            + 'WHERE StartDateTime = NEXT_N_DAYS:' + n
-        );
+        List<Event> events = [
+            SELECT 
+                Id, 
+                Subject, 
+                StartDateTime, 
+                EndDateTime, 
+                Location, 
+                Account.Name, 
+                Type, 
+                Description, 
+                WhoId, 
+                OwnerId, 
+                Interview_Format__c 
+            FROM Event 
+            WHERE StartDateTime >= :nextWeekDayBegin 
+                AND StartDateTime < :nextWeekDayEnd
+        ];
 
         if (events.isEmpty()) {
             return;
@@ -125,8 +134,8 @@ public with sharing class EventReminder {
             '<html><body>' 
             + 'You have a scheduled event ' + day + '<br><br>' 
             + 'Subject: <br>' + event.Subject +'<br><br>' 
-            + 'Start: <br>' + event.StartDateTime +'<br><br>' 
-            + 'End: <br>' + event.EndDateTime +'<br><br>' 
+            + 'Start: <br>' + event.StartDateTime.formatLong() +'<br><br>' 
+            + 'End: <br>' + event.EndDateTime.formatLong() +'<br><br>' 
             + 'Contact: <br>' + contactName +'<br><br>' 
             + 'Location: <br>' + event.Location +'<br><br>' 
             + 'Company or Organization: <br>' + event.Account.Name +'<br><br>' 

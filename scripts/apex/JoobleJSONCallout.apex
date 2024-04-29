@@ -70,5 +70,5 @@ if (res.getStatusCode() == 200) {
         System.debug('----------END LOOP ' + loopCount + ' ----------');
     }
 } else {
-    System.debug('HTTP request failed. Status Code: ' + res.getStatusCode() + ' | Response Body: ' + resBody);
+    System.debug('HTTP request failed | Status Code: ' + res.getStatusCode());
 }

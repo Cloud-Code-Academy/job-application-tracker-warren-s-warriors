@@ -1,77 +1,77 @@
 @IsTest
 private with sharing class TaxCalculationTest {
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_Is_NullOrZero() {
+    private static void salaryMinusStandardDeduction_of_zero_is_subject_to_no_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(1000);
 
         System.assertEquals(0.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_11000() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_11000_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(24850);
 
         System.assertEquals(1100.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_44725() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_44725_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(58575);
 
         System.assertEquals(5147.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_95375() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_95375_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(109225);
 
         System.assertEquals(16290.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_182100() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_182100_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(195950);
 
         System.assertEquals(37104.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_231250() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_231250_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(245100);
 
         System.assertEquals(52832.00, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_LessThanOrEqualTo_578125() {
+    private static void salaryMinusStandardDeduction_of_less_than_or_equal_to_578125_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(591975);
 
         System.assertEquals(174238.25, federalTax);
     }
 
     @IsTest
-    private static void federalTax_SalaryMinusStandardDeduction_GreaterThan_578125() {
+    private static void salaryMinusStandardDeduction_of_greater_than_578125_is_subject_to_federal_tax() {
         Decimal federalTax = TaxCalculation.calculateFederalTax(591976);
 
         System.assertEquals(174238.62, federalTax);
     }
 
     @IsTest
-    private static void socialSecurityTax() {
+    private static void salary_of_10000_is_subject_to_Social_Security_tax() {
         Decimal socialSecurityTax = TaxCalculation.calculateSocialSecurityTax(10000);
 
         System.assertEquals(620.00, socialSecurityTax);
     }
 
     @IsTest
-    private static void medicareTax() {
+    private static void salary_of_20000_is_subject_to_Medicare_tax() {
         Decimal medicareTax = TaxCalculation.calculateMedicareTax(20000);
 
         System.assertEquals(290.00, medicareTax);
     }
 
     @IsTest
-    private static void insertJobApplicationWithSalary_ExpectTaxFieldsUpdated() {
+    private static void insert_job_application_with_salary_updates_taxes() {
         // GIVEN
         Job_Application__c jobApplicationToInsert = new Job_Application__c();
 

@@ -12,6 +12,7 @@ import LINK_FIELD from '@salesforce/schema/Job__c.Link__c';
 import queryJobs from '@salesforce/apex/JobController.queryJobs';
 import upsertJobApplications from '@salesforce/apex/JobApplicationController.upsertJobApplications';
 import deleteJobs from '@salesforce/apex/JobController.deleteJobs';
+import deleteAllJobs from '@salesforce/apex/JobController.deleteAllJobs';
 
 const ACTIONS = [
     { label: 'Save As Job Application', name: 'save' }
@@ -258,6 +259,30 @@ export default class JobSearchResult extends LightningElement {
             await deleteJobs({ recordIds: this.recordIds });
 
             this.recordIds = [];
+        } catch (e) {
+            this.handleErrorWhileDeletingRecord(e);
+        }
+
+        try {
+            await refreshApex(this.jobs);
+        } catch (e) {
+            this.handleErrorWhileRefreshingRecord(e);
+        }
+    }
+
+    async handleClearAllResultsAndRefreshRecord(event) {
+        event.preventDefault();
+
+        try {
+            await deleteAllJobs();
+
+            this.dispatchEvent(
+                new ShowToastEvent({
+                    title: 'Success', 
+                    message: 'All results cleared', 
+                    variant: 'success'
+                })
+            );
         } catch (e) {
             this.handleErrorWhileDeletingRecord(e);
         }

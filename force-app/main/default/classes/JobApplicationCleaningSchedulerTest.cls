@@ -1,10 +1,7 @@
 @IsTest
 private with sharing class JobApplicationCleaningSchedulerTest {
-    // @TestSetup
-    // private static void setup() {}
-
     @IsTest
-    private static void schedule() {
+    private static void schedule_job_at_one() {
         // GIVEN
         String CRON_EXP = '0 0 1 * * ?';
 
@@ -30,6 +27,8 @@ private with sharing class JobApplicationCleaningSchedulerTest {
 
         System.debug('cronTrigger = ' + cronTrigger);
 
+        Test.stopTest();
+
         // THEN
         Datetime now = Datetime.now();
         Datetime nextFireTime;
@@ -43,7 +42,5 @@ private with sharing class JobApplicationCleaningSchedulerTest {
         System.assertEquals(String.valueOf(nextFireTime), String.valueOf(cronTrigger.NextFireTime), 'Expect NextFireTime to be 1:00 AM');
         System.assertEquals('WAITING', cronTrigger.State, 'Expect State to be WAITING');
         System.assertEquals(0, cronTrigger.TimesTriggered, 'Expect TimesTriggered to be 0');
-
-        Test.stopTest();
     }
 }

@@ -32,7 +32,7 @@ private with sharing class EventTest {
     }
 
     @IsTest
-    private static void validateStartDTIsBeforeEndDT_Insert() {
+    private static void startDT_cannot_be_after_endDT_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -46,9 +46,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -57,12 +59,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateStartDTIsBeforeEndDT_Update() {
+    private static void startDT_cannot_be_after_endDT_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -93,9 +93,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -104,12 +106,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOnWeekend_Insert() {
+    private static void cannot_schedule_event_on_weekend_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -123,9 +123,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -134,12 +136,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOnWeekend_Update() {
+    private static void cannot_schedule_event_on_weekend_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -170,9 +170,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -181,12 +183,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_newStartDT_existingStartDT_existingEndDT_newEndDT_Insert() {
+    private static void cannot_overlap_event_newStartDT_existingStartDT_existingEndDT_newEndDT_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -200,9 +200,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -211,12 +213,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_newStartDT_existingStartDT_existingEndDT_newEndDT_Update() {
+    private static void cannot_overlap_event_newStartDT_existingStartDT_existingEndDT_newEndDT_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -247,9 +247,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -258,12 +260,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_newStartDT_existingStartDT_newEndDT_existingEndDT_Insert() {
+    private static void cannot_overlap_event_newStartDT_existingStartDT_newEndDT_existingEndDT_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -277,9 +277,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -288,12 +290,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_newStartDT_existingStartDT_newEndDT_existingEndDT_Update() {
+    private static void cannot_overlap_event_newStartDT_existingStartDT_newEndDT_existingEndDT_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -324,9 +324,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -335,12 +337,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_existingStartDT_newStartDT_existingEndDT_newEndDT_Insert() {
+    private static void cannot_overlap_event_existingStartDT_newStartDT_existingEndDT_newEndDT_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -354,9 +354,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -365,12 +367,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_existingStartDT_newStartDT_existingEndDT_newEndDT_Update() {
+    private static void cannot_overlap_event_existingStartDT_newStartDT_existingEndDT_newEndDT_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -401,9 +401,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -412,12 +414,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_existingStartDT_newStartDT_newEndDT_existingEndDT_Insert() {
+    private static void cannot_overlap_event_existingStartDT_newStartDT_newEndDT_existingEndDT_on_insert() {
         // GIVEN
         Event phoneScreen = new Event(
             Subject = 'phoneScreen', 
@@ -431,9 +431,11 @@ private with sharing class EventTest {
         try {
             insert phoneScreen;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -442,12 +444,10 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 
     @IsTest
-    private static void validateNoEventOverlap_existingStartDT_newStartDT_newEndDT_existingEndDT_Update() {
+    private static void cannot_overlap_event_existingStartDT_newStartDT_newEndDT_existingEndDT_on_update() {
         // GIVEN
         List<Event> eventsToUpdate = [
             SELECT 
@@ -478,9 +478,11 @@ private with sharing class EventTest {
         try {
             update eventsToUpdate;
 
+            Test.stopTest();
+
+            // THEN
             Assert.fail('Expect exception');
         } catch (Exception e) {
-            // THEN
             System.debug('Exception message = ' + e.getMessage());
 
             System.assertEquals(
@@ -489,7 +491,5 @@ private with sharing class EventTest {
                 'Exception message does not match: ' + e.getMessage()
             );
         }
-
-        Test.stopTest();
     }
 }
