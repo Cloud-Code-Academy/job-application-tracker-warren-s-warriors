@@ -8,6 +8,8 @@ public with sharing class JobApplicationTriggerHandler {
     }
 
     public void createTaskWhenStatusIsSaved_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Saved') {
                 String description = 
@@ -26,12 +28,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsSaved_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -59,12 +65,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsApplying_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Applying') {
                 String description = 
@@ -85,12 +95,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsApplying_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -119,12 +133,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsApplied_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Applied') {
                 String description = 
@@ -144,12 +162,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsApplied_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -176,12 +198,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsInterviewing_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Interviewing') {
                 String description = 
@@ -202,12 +228,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsInterviewing_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -234,12 +264,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsNegotiating_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Negotiating') {
                 String description = 
@@ -258,12 +292,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsNegotiating_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -287,12 +325,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsAccepted_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Accepted') {
                 String description = 
@@ -311,12 +353,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsAccepted_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -339,12 +385,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsClosed_Insert(List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (newJobApplication.Status__c == 'Closed') {
                 String description = 
@@ -362,12 +412,16 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void createTaskWhenStatusIsClosed_Update(Map<Id, Job_Application__c> triggerDotOldMap, List<Job_Application__c> triggerDotNew) {
+        List<Task> tasksToInsert = new List<Task>();
+
         for (Job_Application__c newJobApplication : triggerDotNew) {
             if (
                 triggerDotOldMap.get(newJobApplication.Id).Status__c != newJobApplication.Status__c 
@@ -388,9 +442,11 @@ public with sharing class JobApplicationTriggerHandler {
                     OwnerId = newJobApplication.OwnerId
                 );
 
-                insert taskToInsert;
+                tasksToInsert.add(taskToInsert);
             }
         }
+
+        insert tasksToInsert;
     }
 
     public void setPrimaryContact(List<Job_Application__c> triggerDotNew) {
